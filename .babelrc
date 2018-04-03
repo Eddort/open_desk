@@ -1,31 +1,3 @@
 {
-	"presets": ["@babel/preset-env","@babel/preset-react", "@babel/es2015"],
-	"retainLines": true,
-	"sourceMaps": true,
-	"plugins": [
-		"syntax-flow",
-		// [
-		// 	"tcomb"
-		// ],
-		"transform-flow-strip-types",
-		// "transform-decorators-legacy"
-	],
-	// "auxiliaryCommentBefore": "istanbul ignore start",
-	// "auxiliaryCommentAfter": "istanbul ignore end",
-	// "env": {
-	// 	"test": {
-	// 		"plugins": [
-	// 			["istanbul", {
-	// 				"useInlineSourceMaps": true,
-	// 				"exclude": [
-	// 					"**/actions/**",
-	// 					"**/jsx/constructor.js", "**/jsx/published.v1.js", "**/jsx/spec.js", 
-	// 					"**/__test_utils/**",
-	// 					"**/store/**",
-	// 					"test', 'test{,-*}.js", "**/*.test.js", "**/__tests__/**", "**/node_modules/**"
-	// 				]
-	// 			}]
-	// 		]
-	// 	}
-	// }
+	"presets": ["env"]
 }
