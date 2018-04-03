@@ -2,9 +2,12 @@
   "name": "open-desk",
   "version": "0.0.1",
   "description": "Init",
-  "main": "build/app.js",
+  "main": "build/app.bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js  --recursive",
+    "test:watch": "npm run test -- --watch",
+    "build": "NODE_PATH=. node ./node_modules/webpack/bin/webpack.js",
+    "build:watch": "npm run build -- --watch"
   },
   "repository": {
     "type": "git",
@@ -14,9 +17,14 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/Akols3/open-desk#readme",
   "devDependencies": {
-    "babel-core": "^6.26.0",
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "@babel/preset-es2015": "^7.0.0-beta.44",
+    "@babel/preset-react": "^7.0.0-beta.44",
+    "babel-core": "^7.0.0-0",
     "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "mocha": "^5.0.5",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13"
   }

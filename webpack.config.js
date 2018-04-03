@@ -8,16 +8,30 @@ module.exports = {
     filename: 'app.bundle.js',
     path: path.join(__dirname, 'build'),
   },
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      test: /\.js$/,
-      exclude: /(node_modules|bower_components)/,
-      use: {
-        loader: 'babel-loader',
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
           options: {
-            babelrc: true
+            presets: ['@babel/preset-env']
           }
+        }
       }
-    })
-  ],
+    ]
+  }
+  // plugins: [
+  //   new webpack.LoaderOptionsPlugin({
+  //     test: /\.js$/,
+  //     exclude: /(node_modules|bower_components)/,
+  //     use: {
+  //       loader: 'babel-loader',
+  //         options: {
+  //           babelrc: true
+  //         }
+  //     }
+  //   })
+  // ],
 };
