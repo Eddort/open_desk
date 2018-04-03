@@ -6,7 +6,7 @@ module.exports = {
   mode: 'development',
   output: {
     filename: 'app.bundle.js',
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'public'),
   },
   module: {
     rules: [
@@ -21,6 +21,9 @@ module.exports = {
         }
       }
     ]
+  },
+  devServer: {
+    contentBase: './public'
   }
   // plugins: [
   //   new webpack.LoaderOptionsPlugin({
