@@ -8,10 +8,14 @@ module.exports = {
     filename: 'app.bundle.js',
     path: path.join(__dirname, 'public'),
   },
+   plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
@@ -23,7 +27,8 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: './public'
+    contentBase: './public',
+    hot: true
   }
   // plugins: [
   //   new webpack.LoaderOptionsPlugin({
