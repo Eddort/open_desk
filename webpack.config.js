@@ -2,7 +2,7 @@ const webpack       = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: './src/app.js',
+  entry: './src/index.js',
   mode: 'development',
   output: {
     filename: 'app.bundle.js',
@@ -12,15 +12,18 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx)?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015']
+            "presets": ["env", "react", "es2015"]
           }
         }
       }
