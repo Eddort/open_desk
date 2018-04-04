@@ -8,6 +8,8 @@ import { ConnectedRouter, push } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import { Route, Router } from 'react-router'
 
+import './scss/custom.scss'
+
 const history = createHistory()
 
 const store = configureStore(history)

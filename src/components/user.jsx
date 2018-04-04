@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 
+import Button from './spec/button'
+
 export default class User extends Component {
 	
 	constructor(props) {
@@ -19,6 +21,7 @@ export default class User extends Component {
 					{name}
 				
 				<input type="text" onInput={ this.setValue }/>
+				<Button handleClick={ function(){ console.log(123) } } name={ 'SSSS' } />
 			</p>
 		</div>
 	}
