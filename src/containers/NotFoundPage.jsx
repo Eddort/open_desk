@@ -13,8 +13,8 @@ class App extends Component {
 		const { setName } = this.props.userActions
 		console.log(history, '!!!!!!!')
 		return <div>
-			<h6> App </h6>
-			<User name={ user.name } setName={ setName } />
+			<h6> NOT FOUND </h6>
+			
 		</div>
 	}
 }
