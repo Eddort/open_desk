@@ -11,7 +11,7 @@ class App extends Component {
 		const { user } = this.props
 		const { setName } = this.props.userActions
 		return <div>
-			<h6> APP </h6>
+			<h6> App </h6>
 			<User name={ user.name } setName={ setName } />
 		</div>
 	}

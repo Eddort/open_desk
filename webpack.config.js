@@ -54,6 +54,10 @@ module.exports = {
     hot: true,
     historyApiFallback: {
       index: 'index.html'
+    },
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000, // How often check for changes (in milliseconds)
     }
   }
   // plugins: [
