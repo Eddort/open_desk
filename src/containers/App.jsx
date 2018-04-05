@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import User from '../components/user'
 import * as userActions from '../actions/user'
+
+import './test.css'
+
 class App extends Component {
 	
 	render() {

@@ -1,6 +1,7 @@
 const webpack       = require('webpack');
 const path = require('path');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require ('extract-text-webpack-plugin');
 module.exports = {
   entry: './src/index.js',
   mode: 'development',
@@ -10,7 +11,11 @@ module.exports = {
   },
    plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('bundle.css'),
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    })
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -33,24 +38,32 @@ module.exports = {
       },
       {
       test: /\.(scss)$/,
-      use: [{
-        loader: 'style-loader', // inject CSS to page
-      }, {
-        loader: 'css-loader', // translates CSS into CommonJS modules
-      }, {
-        loader: 'postcss-loader', // Run post css actions
-        options: {
-          plugins: function () { // post css plugins, can be exported to postcss.config.js
-            return [
-              require('precss'),
-              require('autoprefixer')
-            ];
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [{
+          loader: 'css-loader', // translates CSS into CommonJS modules
+        }, {
+          loader: 'postcss-loader', // Run post css actions
+          options: {
+            plugins: function () { // post css plugins, can be exported to postcss.config.js
+              return [
+                require('precss'),
+                require('autoprefixer')
+              ];
+            }
           }
-        }
-      }, {
-        loader: 'sass-loader' // compiles Sass to CSS
-      }]
+        }, {
+          loader: 'sass-loader' // compiles Sass to CSS
+        }]
+      })
     },
+    {
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: "style-loader",
+        use: "css-loader"
+      })
+    }
     ]
   },
   devServer: {

@@ -31,7 +31,7 @@ export default class Button extends Component {
 	}
 	
 	render() {
-		const { name, type = "button", handleClick }  = this.props
+		const { name, type = "button", handleClick = () => {} }  = this.props
 		return <input className={ this.className } onClick={ handleClick } type={ type } value={ name }/>
 	}
 }

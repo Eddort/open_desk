@@ -11,13 +11,13 @@ import { Route, Router } from 'react-router'
 const history = createHistory()
 
 const store = configureStore(history)
-store.dispatch(push('/auth'))
+// store.dispatch(push('/auth'))
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>
 			<div>
 			<div> ЧЕ НАДО </div>
-				<Route path="/auth" component={App}/>
+				<Route path="/" component={App}/>
 			</div>
 		</Router>
 	</Provider>,
