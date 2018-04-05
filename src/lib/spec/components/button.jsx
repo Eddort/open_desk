@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
 const colorsTypes = [
 	'primary',
@@ -34,4 +35,8 @@ export default class Button extends Component {
 		const { name, type = "button", handleClick = () => {} }  = this.props
 		return <input className={ this.className } onClick={ handleClick } type={ type } value={ name }/>
 	}
+}
+
+Button.propTypes = {
+	name: PropTypes.string.isRequired
 }
