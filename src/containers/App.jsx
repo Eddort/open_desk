@@ -8,8 +8,9 @@ class App extends Component {
 	
 	render() {
 		
-		const { user } = this.props
+		const { user, history } = this.props
 		const { setName } = this.props.userActions
+		console.log(history, '!!!!!!!')
 		return <div>
 			<h6> App </h6>
 			<User name={ user.name } setName={ setName } />

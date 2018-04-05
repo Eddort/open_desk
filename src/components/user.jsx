@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 
-import Button from './spec/button'
+import { Button } from 'spec'
 
 export default class User extends Component {
 	

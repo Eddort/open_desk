@@ -8,8 +8,6 @@ import { ConnectedRouter, push } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import { Route, Router } from 'react-router'
 
-import './scss/custom.scss'
-
 const history = createHistory()
 
 const store = configureStore(history)
@@ -17,7 +15,10 @@ store.dispatch(push('/auth'))
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>
-			<Route path="/auth" component={App}/>
+			<div>
+			<div> ЧЕ НАДО </div>
+				<Route path="/auth" component={App}/>
+			</div>
 		</Router>
 	</Provider>,
 	document.getElementById('app')
