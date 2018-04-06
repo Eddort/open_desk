@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import configureStore from './store/configureStore'
 
-import { ConnectedRouter, push } from 'react-router-redux'
+// import { ConnectedRouter, push } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import { Route, Router, Switch } from 'react-router'
 
 import App from './containers/App';
+import Desk from './containers/Desk';
 import NotFoundPage from './containers/NotFoundPage';
 
 const history = createHistory()
@@ -19,6 +20,7 @@ ReactDOM.render(
 		<Router history={history}>
 			<Switch>
 				<Route exact path="/" component={App}/>
+				<Route exact path="/desk" component={Desk}/>
 				<Route component={NotFoundPage} />
 			</Switch>
 		</Router>

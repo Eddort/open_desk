@@ -25,12 +25,19 @@ const finn: Author = {
 const princess: Author = {
   id: '4',
   name: 'Princess bubblegum',
-  url: 'http://adventuretime.wikia.com/wiki/Princess_Bubblegum',
+  url: 'http://ssss',
+  avatarUrl: 'https://68.media.tumblr.com/avatar_ec98529441c4_128.png',
+};
+
+const hzkto: Author = {
+  id: '5',
+  name: 'Ya hz kro eto',
+  url: 'http://ssss',
   avatarUrl: 'https://68.media.tumblr.com/avatar_ec98529441c4_128.png',
 };
 
 export const authors: Author[] = [
-  jake, BMO, finn, princess,
+  jake, BMO, finn, princess, hzkto
 ];
 
 export const quotes: Quote[] = [
@@ -93,6 +100,11 @@ export const quotes: Quote[] = [
     id: '12',
     content: 'Haven\'t slept for a solid 83 hours, but, yeah, I\'m good.',
     author: princess,
+  },
+  {
+    id: '12',
+    content: 'Haven\'t slept for a solid 83 hours, but, yeah, I\'m good.',
+    author: hzkto,
   },
 ];
 

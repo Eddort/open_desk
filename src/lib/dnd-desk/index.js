@@ -5,5 +5,5 @@ import { generateQuoteMap } from './data';
 
 export const data = {
   medium: generateQuoteMap(100),
-  large: generateQuoteMap(500),
+  large: generateQuoteMap(20),
 };

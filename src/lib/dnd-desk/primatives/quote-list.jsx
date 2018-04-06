@@ -12,7 +12,7 @@ import type {
   DroppableStateSnapshot,
   DraggableProvided,
   DraggableStateSnapshot,
-} from '../../../src/';
+} from 'react-beautiful-dnd';
 
 const Wrapper = styled.div`
   background-color: ${({ isDraggingOver }) => (isDraggingOver ? colors.blue.lighter : colors.blue.light)};

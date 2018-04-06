@@ -47,6 +47,7 @@ width: 40px;
 height: 40px;
 border-radius: 50%;
 margin-right: ${grid}px;
+margin-left: ${grid}px;
 flex-shrink: 0;
 flex-grow: 0;
 `;
@@ -64,6 +65,11 @@ display: flex;
 flex-direction: column;
 `;
 
+const HeaderQuote = styled.div`
+font-weight:bold;
+flex-grow: 1;
+`;
+
 const BlockQuote = styled.div`
 &::before {
   content: open-quote;
@@ -74,7 +80,7 @@ const BlockQuote = styled.div`
 }
 `;
 
-const Footer = styled.div`
+const QuoteWrapp = styled.div`
 display: flex;
 margin-top: ${grid}px;
 `;
@@ -120,14 +126,19 @@ export default class QuoteItem extends React.PureComponent<Props> {
         {...provided.draggableProps}
         {...provided.dragHandleProps}
       >
-        <Avatar src={quote.author.avatarUrl} alt={quote.author.name} />
+        
         <Content>
+          <QuoteWrapp>
+            <HeaderQuote>{quote.author.name}</HeaderQuote>
+            <Avatar src={quote.author.avatarUrl} alt={quote.author.name} />
+          </QuoteWrapp>
           <BlockQuote>{quote.content}</BlockQuote>
-          <Footer>
+          <QuoteWrapp>
             <QuoteId>(id: {quote.id})</QuoteId>
             <Attribution>{quote.author.name}</Attribution>
-          </Footer>
+          </QuoteWrapp>
         </Content>
+       
       </Container>
     );
   }
