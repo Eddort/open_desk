@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 
 export default class User extends Component {
 	
@@ -11,7 +11,7 @@ export default class User extends Component {
 	
 	render() {
 		console.log(this.props)
-		const { name }  = this.props
+		// const { name }  = this.props
 		return <form>
 			<div class="form-group">
 				<label for="exampleInputEmail1">Email address</label>

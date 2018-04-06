@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import styled, { injectGlobal } from 'styled-components';
+import styled from 'styled-components';
 import Column from './column';
-import { colors } from '../constants';
+// import { colors } from '../constants';
 import reorder, { reorderQuoteMap } from '../reorder';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import type {
@@ -13,8 +13,8 @@ import type {
 } from 'react-beautiful-dnd';
 import type { QuoteMap } from '../types';
 
-const publishOnDragStart= (state) => { console.log(state) };
-const publishOnDragEnd = (state) => { console.log(state) };
+const publishOnDragStart= (state) => { console.log(state, '111') };
+const publishOnDragEnd = (state) => { console.log(state, '222') };
 
 const ParentContainer = styled.div`
   height: ${({ height }) => height};
@@ -43,7 +43,7 @@ type State = {|
 
 export default class Board extends Component<Props, State> {
   /* eslint-disable react/sort-comp */
-
+  
   state: State = {
     columns: this.props.initial,
     ordered: Object.keys(this.props.initial),
@@ -52,15 +52,14 @@ export default class Board extends Component<Props, State> {
 
   boardRef: ?HTMLElement
 
-  componentDidMount() {
-    // eslint-disable-next-line no-unused-expressions
-    injectGlobal`
-      body {
-        background: ${colors.blue.deep};
-      }
-    `;
+  componentWillReceiveProps(nextProps: Props) {
+    this.setState({
+      columns: nextProps.initial,
+      ordered: Object.keys(nextProps.initial),
+      autoFocusQuoteId: null,
+    })
   }
-
+  
   onDragStart = (initial: DragStart) => {
     publishOnDragStart(initial);
 
