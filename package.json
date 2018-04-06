@@ -10,12 +10,13 @@
     "build:watch": "npm run build -- --watch",
     "dev:client": "webpack-dev-server --watch-poll",
     "dev:server": "node server.js",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "flow": "flow check"
   },
   "pre-commit": [
     "test",
     "lint",
-    "flow check"
+    "flow"
   ],
   "repository": {
     "type": "git",
