@@ -44,67 +44,67 @@ export const quotes: Quote[] = [
   {
     id: '1',
     content: 'Sometimes life is scary and dark',
-    authorId: 'BMO',
+    authorId: '1',
   },
   {
     id: '2',
     content: 'Sucking at something is the first step towards being sorta good at something.',
-    authorId: 'jake',
+    authorId: '2',
   },
   {
     id: '3',
     content: 'You got to focus on what\'s real, man',
-    authorId: 'jake',
+    authorId: '3',
   },
   {
     id: '4',
     content: 'Is that where creativity comes from? From sad biz?',
-    authorId: 'hzkto',
+    authorId: '5',
   },
   {
     id: '5',
     content: 'Homies help homies. Always',
-    authorId: 'hzkto',
+    authorId: '4',
   },
   {
     id: '6',
     content: 'Responsibility demands sacrifice',
-    authorId: 'hzkto',
+    authorId: '3',
   },
   {
     id: '7',
     content: 'That\'s it! The answer was so simple, I was too smart to see it!, That\'s it! The answer was so simple, I was too smart to see it!, That\'s it! The answer was so simple, I was too smart to see it!, That\'s it! The answer was so simple, I was too smart to see it!',
-    authorId: 'hzkto',
+    authorId: '2',
   },
   {
     id: '8',
     content: 'People make mistakes. It’s a part of growing up',
-    authorId: 'hzkto',
+    authorId: '3',
   },
   {
     id: '9',
     content: 'Don\'t you always call sweatpants \'give up on life pants,\' Jake?',
-    authorId: 'hzkto',
+    authorId: '5',
   },
   {
     id: '10',
     content: 'I should not have drunk that much tea!',
-    authorId: 'hzkto',
+    authorId: '3',
   },
   {
     id: '11',
     content: 'Please! I need the real you!',
-    authorId: 'hzkto',
+    authorId: '2',
   },
   {
     id: '12',
     content: 'Haven\'t slept for a solid 83 hours, but, yeah, I\'m good.',
-    authorId: 'hzkto',
+    authorId: '1',
   },
   {
     id: '12',
     content: 'Haven\'t slept for a solid 83 hours, but, yeah, I\'m good.',
-    authorId: 'hzkto',
+    authorId: '4',
   },
 ];
 
@@ -112,12 +112,12 @@ let idCount: number = 0;
 
 export const getQuotes = (count: number): Quote[] =>
   Array.from({ length: count }, (v, k) => k).map(() => {
-    const random: Quote = quotes[0];
-
+    const random: Quote = quotes[Math.floor(Math.random() * quotes.length)];
+    const randomAuthors: Author = authors[Math.floor(Math.random() * authors.length)];
     const custom: Quote = {
       id: `quote-${idCount++}`,
       content: random.content,
-      authorId: 'hzkto',
+      authorId: randomAuthors.id,
     };
 
     return custom;
@@ -158,6 +158,6 @@ export const getDeskData = (total: number): DeskData => ({
   quotes: generateQuoteMap(total),
   authors: authors.reduce((prev, author) => ({
     ...prev,
-    [author.name]: author
+    [author.id]: author
   }), {})
 });
