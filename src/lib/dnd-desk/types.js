@@ -13,7 +13,7 @@ export type Author = {|
 export type Quote = {|
   id: Id,
   content: string,
-  author: Author
+  authorId: string
 |}
 
 export type Dragging = {|
@@ -23,6 +23,11 @@ export type Dragging = {|
 
 export type QuoteMap = {
   [key: string]: Quote[]
+}
+
+export type DeskData = {
+  quotes: QuoteMap,
+  authors: any
 }
 
 export type Task = {|

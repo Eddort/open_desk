@@ -11,7 +11,7 @@ import type {
   DraggableLocation,
   DroppableProvided,
 } from 'react-beautiful-dnd';
-import type { QuoteMap } from '../types';
+import type { QuoteMap, DeskData } from '../types';
 
 const publishOnDragStart= (state) => { console.log(state, '111') };
 const publishOnDragEnd = (state) => { console.log(state, '222') };
@@ -31,13 +31,14 @@ const Container = styled.div`
 `;
 
 type Props = {|
-  initial: QuoteMap,
+  initial: DeskData,
   containerHeight?: string,
 |}
 
 type State = {|
   columns: QuoteMap,
   ordered: string[],
+  authors: any,
   autoFocusQuoteId: ?string,
 |}
 
@@ -45,8 +46,9 @@ export default class Board extends Component<Props, State> {
   /* eslint-disable react/sort-comp */
   
   state: State = {
-    columns: this.props.initial,
-    ordered: Object.keys(this.props.initial),
+    columns: this.props.initial.quotes,
+    authors: this.props.initial.authors,
+    ordered: Object.keys(this.props.initial.quotes),
     autoFocusQuoteId: null,
   }
 
@@ -54,8 +56,9 @@ export default class Board extends Component<Props, State> {
 
   componentWillReceiveProps(nextProps: Props) {
     this.setState({
-      columns: nextProps.initial,
-      ordered: Object.keys(nextProps.initial),
+      columns: nextProps.initial.quotes,
+      authors: nextProps.initial.authors,
+      ordered: Object.keys(nextProps.initial.quotes),
       autoFocusQuoteId: null,
     })
   }
@@ -115,6 +118,7 @@ export default class Board extends Component<Props, State> {
   render() {
     const columns: QuoteMap = this.state.columns;
     const ordered: string[] = this.state.ordered;
+    const authors: any = this.state.authors;
     const { containerHeight } = this.props;
 
     const board = (
@@ -132,6 +136,7 @@ export default class Board extends Component<Props, State> {
                 index={index}
                 title={key}
                 quotes={columns[key]}
+                authors={authors}
                 autoFocusQuoteId={this.state.autoFocusQuoteId}
               />
             ))}

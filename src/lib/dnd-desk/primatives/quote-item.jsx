@@ -11,6 +11,7 @@ type Props = {
   isDragging: boolean,
   provided: DraggableProvided,
   autoFocus?: boolean,
+  author: any
 }
 
 const Container = styled.a`
@@ -116,11 +117,11 @@ export default class QuoteItem extends React.PureComponent<Props> {
   }
 
   render() {
-    const { quote, isDragging, provided } = this.props;
-
+    const { quote, isDragging, provided, author } = this.props;
+    
     return (
       <Container
-        href={quote.author.url}
+        href={author.url}
         isDragging={isDragging}
         innerRef={provided.innerRef}
         {...provided.draggableProps}
@@ -129,13 +130,13 @@ export default class QuoteItem extends React.PureComponent<Props> {
         
         <Content>
           <QuoteWrapp>
-            <HeaderQuote>{quote.author.name}</HeaderQuote>
-            <Avatar src={quote.author.avatarUrl} alt={quote.author.name} />
+            <HeaderQuote>{author.name}</HeaderQuote>
+            <Avatar src={author.avatarUrl} alt={author.name} />
           </QuoteWrapp>
           <BlockQuote>{quote.content}</BlockQuote>
           <QuoteWrapp>
             <QuoteId>(id: {quote.id})</QuoteId>
-            <Attribution>{quote.author.name}</Attribution>
+            <Attribution>{author.name}</Attribution>
           </QuoteWrapp>
         </Content>
        

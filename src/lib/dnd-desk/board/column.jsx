@@ -36,6 +36,7 @@ const Header = styled.div`
 type Props = {|
   title: string,
   quotes: Quote[],
+  authors: any,
   index: number,
   autoFocusQuoteId: ?string,
 |}
@@ -45,6 +46,7 @@ export default class Column extends Component<Props> {
     const title: string = this.props.title;
     const quotes: Quote[] = this.props.quotes;
     const index: number = this.props.index;
+    const authors: any = this.props.authors;
     return (
       <Draggable draggableId={title} index={index}>
         {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
@@ -65,6 +67,7 @@ export default class Column extends Component<Props> {
                 listId={title}
                 listType="QUOTE"
                 quotes={quotes}
+                authors={authors}
                 autoFocusQuoteId={this.props.autoFocusQuoteId}
               />
             </Container>

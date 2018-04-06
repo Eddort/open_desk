@@ -50,6 +50,7 @@ type Props = {|
   internalScroll?: boolean,
   isDropDisabled ?: boolean,
   style?: Object,
+  authors: any,
   // may not be provided - and might be null
   autoFocusQuoteId?: ?string,
   ignoreContainerClipping?: boolean,
@@ -57,6 +58,7 @@ type Props = {|
 
 type QuoteListProps = {|
   quotes: Quote[],
+  authors: any,
   autoFocusQuoteId: ?string,
 |}
 
@@ -70,6 +72,7 @@ class InnerQuoteList extends Component<QuoteListProps> {
   }
 
   render() {
+
     return (
       <div>
         {this.props.quotes.map((quote: Quote, index: number) => (
@@ -79,6 +82,7 @@ class InnerQuoteList extends Component<QuoteListProps> {
                 <QuoteItem
                   key={quote.id}
                   quote={quote}
+                  author={this.props.authors[quote.authorId]}
                   isDragging={dragSnapshot.isDragging}
                   provided={dragProvided}
                   autoFocus={this.props.autoFocusQuoteId === quote.id}
@@ -97,12 +101,13 @@ type InnerListProps = {|
   dropProvided: DroppableProvided,
   quotes: Quote[],
   title: ?string,
+  authors: any,
   autoFocusQuoteId: ?string,
 |}
 
 class InnerList extends Component<InnerListProps> {
   render() {
-    const { quotes, dropProvided, autoFocusQuoteId } = this.props;
+    const { quotes, dropProvided, autoFocusQuoteId, authors } = this.props;
     const title = this.props.title ? (
       <Title>{this.props.title}</Title>
     ) : null;
@@ -113,6 +118,7 @@ class InnerList extends Component<InnerListProps> {
         <DropZone innerRef={dropProvided.innerRef}>
           <InnerQuoteList
             quotes={quotes}
+            authors={authors}
             autoFocusQuoteId={autoFocusQuoteId}
           />
           {dropProvided.placeholder}
@@ -134,8 +140,9 @@ export default class QuoteList extends Component<Props> {
       quotes,
       autoFocusQuoteId,
       title,
+      authors
     } = this.props;
-
+  
     return (
       <Droppable
         droppableId={listId}
@@ -154,6 +161,7 @@ export default class QuoteList extends Component<Props> {
               <ScrollContainer>
                 <InnerList
                   quotes={quotes}
+                  authors={authors}
                   title={title}
                   dropProvided={dropProvided}
                   autoFocusQuoteId={autoFocusQuoteId}
@@ -163,6 +171,7 @@ export default class QuoteList extends Component<Props> {
               <InnerList
                 quotes={quotes}
                 title={title}
+                authors={authors}
                 dropProvided={dropProvided}
                 autoFocusQuoteId={autoFocusQuoteId}
               />
