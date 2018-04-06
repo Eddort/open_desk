@@ -44,67 +44,80 @@ export const quotes: Quote[] = [
   {
     id: '1',
     content: 'Sometimes life is scary and dark',
+    url: 'https://github.com/facebook/flow',
     authorId: '1',
   },
   {
     id: '2',
     content: 'Sucking at something is the first step towards being sorta good at something.',
+    url: 'https://github.com/facebook/flow',
     authorId: '2',
   },
   {
     id: '3',
     content: 'You got to focus on what\'s real, man',
+    url: 'https://github.com/facebook/flow',
     authorId: '3',
   },
   {
     id: '4',
     content: 'Is that where creativity comes from? From sad biz?',
+    url: 'https://github.com/facebook/flow',
     authorId: '5',
   },
   {
     id: '5',
     content: 'Homies help homies. Always',
+    url: 'https://github.com/facebook/flow',
     authorId: '4',
   },
   {
     id: '6',
     content: 'Responsibility demands sacrifice',
+    url: 'https://github.com/facebook/flow',
     authorId: '3',
   },
   {
     id: '7',
     content: 'That\'s it! The answer was so simple, I was too smart to see it!, That\'s it! The answer was so simple, I was too smart to see it!, That\'s it! The answer was so simple, I was too smart to see it!, That\'s it! The answer was so simple, I was too smart to see it!',
+    url: 'https://github.com/facebook/flow',
     authorId: '2',
   },
   {
     id: '8',
     content: 'People make mistakes. It’s a part of growing up',
     authorId: '3',
+    url: 'https://github.com/facebook/flow',
   },
   {
     id: '9',
     content: 'Don\'t you always call sweatpants \'give up on life pants,\' Jake?',
     authorId: '5',
+    url: 'https://github.com/facebook/flow',
   },
   {
     id: '10',
     content: 'I should not have drunk that much tea!',
     authorId: '3',
+    url: 'https://github.com/facebook/flow',
   },
   {
     id: '11',
     content: 'Please! I need the real you!',
     authorId: '2',
+    url: 'https://github.com/facebook/flow',
   },
   {
     id: '12',
     content: 'Haven\'t slept for a solid 83 hours, but, yeah, I\'m good.',
     authorId: '1',
+    url: 'https://github.com/facebook/flow',
   },
   {
     id: '12',
     content: 'Haven\'t slept for a solid 83 hours, but, yeah, I\'m good.',
     authorId: '4',
+    url: 'https://github.com/facebook/flow',
   },
 ];
 
@@ -118,6 +131,7 @@ export const getQuotes = (count: number): Quote[] =>
       id: `quote-${idCount++}`,
       content: random.content,
       authorId: randomAuthors.id,
+      url: random.url
     };
 
     return custom;

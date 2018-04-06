@@ -121,7 +121,7 @@ export default class QuoteItem extends React.PureComponent<Props> {
     
     return (
       <Container
-        href={author.url}
+        href={quote.url}
         isDragging={isDragging}
         innerRef={provided.innerRef}
         {...provided.draggableProps}

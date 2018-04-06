@@ -13,7 +13,8 @@ export type Author = {|
 export type Quote = {|
   id: Id,
   content: string,
-  authorId: string
+  authorId: string,
+  url: string
 |}
 
 export type Dragging = {|
