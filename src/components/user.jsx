@@ -16,7 +16,7 @@ export default class User extends Component {
 		const { name }  = this.props
 		return <div>
 			<div>
-				Привет,
+				Приве2т,
 				
 					{name}
 				<input type="text" onInput={ this.setValue }/>

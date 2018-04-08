@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { hot } from 'react-hot-loader'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Board from '../components/board'
@@ -13,7 +12,7 @@ class Desk extends Component {
 		const { setName } = this.props.boardActions
 		console.log(history, '!!!!!!!')
 		return <div>
-			<h6> App </h6>
+			<h6> App DESK </h6>
 			<Board name={ user.name } setName={ setName } />
 		</div>
 	}
@@ -27,4 +26,4 @@ const mapDispatchToProps = (dispatch) => ({
 	boardActions: bindActionCreators(userActions, dispatch)
 })
 
-export default hot(module)(connect(mapStateToProps, mapDispatchToProps)(Desk))
+export default connect(mapStateToProps, mapDispatchToProps)(Desk)

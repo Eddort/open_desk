@@ -5,18 +5,20 @@
   "main": "build/app.bundle.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js  --recursive",
+    "test-full": "npm run test && npm run lint && npm run flow",
     "test:watch": "npm run test -- --watch",
-    "build": "NODE_PATH=. node ./node_modules/webpack/bin/webpack.js",
+    "build": "NODE_ENV=production NODE_PATH=. node ./node_modules/webpack/bin/webpack.js",
     "build:watch": "npm run build -- --watch",
-    "dev:client": "webpack-dev-server --watch-poll",
+    "dev:client": "cross-env NODE_ENV=development NODE_PATH=. webpack-dev-server --watch-poll",
     "dev:server": "node server.js",
     "lint": "eslint ./",
-    "flow": "flow check"
+    "flow": "flow check",
+    "server:dev": "NODE_ENV=development NODE_PATH=. babel-node server.js",
+    "server": "NODE_ENV=production NODE_PATH=. babel-node server.js",
+    "postinstall" : "npm link dnd-desk && npm link spec"
   },
   "pre-commit": [
-    "test",
-    "lint",
-    "flow"
+    "test-full"
   ],
   "repository": {
     "type": "git",
@@ -55,10 +57,12 @@
     "style-loader": "^0.20.3",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-server": "^3.1.1",
+    "webpack-hot-middleware": "^2.21.2"
   },
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "cross-env": "^5.1.4",
     "history": "^4.7.2",
     "immutable": "^3.8.2",
     "react": "^16.3.0",
@@ -66,8 +70,10 @@
     "react-dom": "^16.3.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
-    "react-router-redux": "^4.0.8",
+    "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.2",
-    "styled-components": "^3.2.5"
+    "styled-components": "^3.2.5",
+    "spec": "file:../src/lib/spec",
+    "dnd-desk": "file:../src/lib/dnd-desk"
   }
 }

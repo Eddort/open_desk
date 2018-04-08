@@ -13,7 +13,8 @@ export default function configureStore(history, initialState = {}) {
 	if (module.hot) {
 		module.hot.accept('../reducers', () => {
 			const nextRootReducer = require('../reducers')
-			store.replaceReducer(nextRootReducer)
+			console.log('../reducers')
+			store.replaceReducer(nextRootReducer.default)
 		})
 	}
 	

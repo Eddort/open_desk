@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { hot } from 'react-hot-loader'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import User from '../components/user'
@@ -13,7 +12,7 @@ class App extends Component {
 		const { setName } = this.props.userActions
 		console.log(history, '!!!!!!!')
 		return <div>
-			<h6> NOT FOUND </h6>
+			<h6> NOT SSSs </h6>
 			
 		</div>
 	}
@@ -27,4 +26,4 @@ const mapDispatchToProps = (dispatch) => ({
 	userActions: bindActionCreators(userActions, dispatch)
 })
 
-export default hot(module)(connect(mapStateToProps, mapDispatchToProps)(App))
+export default connect(mapStateToProps, mapDispatchToProps)(App)

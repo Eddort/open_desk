@@ -1,29 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux'
+import React from 'react'
 import configureStore from './store/configureStore'
-
 // import { ConnectedRouter, push } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
-import { Route, Router, Switch } from 'react-router'
+import ReactDOM from 'react-dom';
 
-import App from './containers/App';
-import Desk from './containers/Desk';
-import NotFoundPage from './containers/NotFoundPage';
+import { ConnectedRouter } from 'react-router-redux'
+import { Provider } from 'react-redux'
+import Root from './containers/Root';
 
-const history = createHistory()
+const history = createHistory();
+const store =  configureStore(history)
 
-const store = configureStore(history)
-// store.dispatch(push('/auth'))
 ReactDOM.render(
-	<Provider store={store}>
-		<Router history={history}>
-			<Switch>
-				<Route exact path="/" component={App}/>
-				<Route exact path="/desk" component={Desk}/>
-				<Route component={NotFoundPage} />
-			</Switch>
-		</Router>
-	</Provider>,
+		<Provider store={store}>
+			<ConnectedRouter history={history}>
+				<Root/>
+			</ConnectedRouter>
+		</Provider>,
 	document.getElementById('app')
 );
