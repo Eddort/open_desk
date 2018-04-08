@@ -95,7 +95,7 @@ export default class Board extends Component<Props, State> {
         source.index,
         destination.index
       );
-      console.log(ordered)
+      console.log(ordered, '22223sss33')
       this.setState({
         ordered,
       });

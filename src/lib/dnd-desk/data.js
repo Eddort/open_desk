@@ -125,8 +125,8 @@ let idCount: number = 0;
 
 export const getQuotes = (count: number): Quote[] =>
   Array.from({ length: count }, (v, k) => k).map(() => {
-    const random: Quote = quotes[Math.floor(Math.random() * quotes.length)];
-    const randomAuthors: Author = authors[Math.floor(Math.random() * authors.length)];
+    const random: Quote = quotes[1];
+    const randomAuthors: Author = authors[2];
     const custom: Quote = {
       id: `quote-${idCount++}`,
       content: random.content,

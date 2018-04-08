@@ -22,15 +22,16 @@ export default class User extends Component {
 	}
 	
 	render() {
-		console.log(data.large)
-		const { name }  = this.props
+		// console.log(data.large)
+		const { name, desk }  = this.props
+		console.log(desk)
 		return <div>
 		<Button name={this.state.name} handleClick={ this.setCol } />
 			<div>
 				Привет,
 				
 					{name}
-				<Board initial={ this.state.data }/>
+				<Board initial={ desk }/>
 				{/* <input type="text" onInput={ this.setValue }/> */}
 			</div>
 		</div>

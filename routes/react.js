@@ -16,7 +16,6 @@ export default (req, res) => {
 			<html>
 				<head>
 					<title>My Universal App</title>
-                    <link rel='stylesheet' href='bundle.css'>
 				</head>
 				<body>
 					<div id='app'></div>

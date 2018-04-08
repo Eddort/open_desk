@@ -8,18 +8,17 @@ class Desk extends Component {
 	
 	render() {
 		
-		const { user, history } = this.props
-		const { setName } = this.props.boardActions
-		console.log(history, '!!!!!!!')
+		const { desk } = this.props
+
 		return <div>
 			<h6> App DESK </h6>
-			<Board name={ user.name } setName={ setName } />
+			<Board desk={ desk } />
 		</div>
 	}
 }
 
 const mapStateToProps = (state) => ({
-	user: state.user
+	desk: state.desk
 })
 
 const mapDispatchToProps = (dispatch) => ({
