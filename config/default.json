@@ -1,0 +1,11 @@
+{
+	"db": {
+		"options": {
+			"keepAlive": 1,
+			"reconnectTries": 30,
+			"poolSize": 5
+		},
+		"name": "open-desk",
+		"url": "mongodb://mongo:27017/"
+	}
+}

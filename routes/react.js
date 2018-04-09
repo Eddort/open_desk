@@ -9,8 +9,12 @@ import createHistory from 'history/createMemoryHistory'
 
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
 
-export default (req, res) => {
+import Task from '../model/tasks'
+
+export default async (req, res) => {
 	if (process.env.NODE_ENV === 'development') {
+		const task = await Task.getNew("Из и роута реакта")
+		console.log(task)
 		return res.send(`
 			<!doctype html>
 			<html>
@@ -18,6 +22,7 @@ export default (req, res) => {
 					<title>My Universal App</title>
 				</head>
 				<body>
+				${task}
 					<div id='app'></div>
 					<script src='app.bundle.js'></script>
 				</body>

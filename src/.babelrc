@@ -1,11 +1,5 @@
 {
-	"presets": [
-		["env", {
-			"targets": {
-				"node": "current"
-			}
-		}], 
-	"flow", "react"],
+	"presets": ["env",  "flow", "react", "es2015"],
 	"plugins": [
 		"syntax-flow",
 		"transform-flow-strip-types",

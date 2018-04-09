@@ -3,6 +3,8 @@ import express from 'express';
 import webpack from 'webpack';
 import reactRoute from './routes/react';
 
+import mongo from './lib/mongo'
+
 const app = express();
 
 if (process.env.NODE_ENV === 'development') {
@@ -29,11 +31,19 @@ app.use(express.static(path.resolve('./public')));
 
 app.get('*', reactRoute);
 
-app.listen(8082, '0.0.0.0', (err) => {
-	console.log(process.env.NODE_ENV)
-	if(err) {
-		console.error(err);
-	} else {
-		console.info('Listening at http://localhost:8082');	
-	}
-});
+app.set('x-powered-by', false);
+
+const startUp = async () => {
+	await mongo()
+	app.listen(8082, '0.0.0.0', err => {
+		if (err) {
+			console.error(err);
+		} else {
+			console.info('Listening at http://localhost:8082', 'ENV', process.env.NODE_ENV);	
+		}
+	});
+}
+
+startUp()
+
+process.on('uncaughtException', err => console.log(err.stack));
