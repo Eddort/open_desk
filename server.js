@@ -29,11 +29,11 @@ app.use(express.static(path.resolve('./public')));
 
 app.get('*', reactRoute);
 
-app.listen(3000, '0.0.0.0', (err) => {
+app.listen(8082, '0.0.0.0', (err) => {
 	console.log(process.env.NODE_ENV)
 	if(err) {
 		console.error(err);
 	} else {
-		console.info('Listening at http://localhost:3000');	
+		console.info('Listening at http://localhost:8082');	
 	}
 });

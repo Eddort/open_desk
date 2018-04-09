@@ -15,8 +15,9 @@
     "flow": "flow check",
     "server:dev": "NODE_ENV=development NODE_PATH=. babel-node server.js",
     "server": "NODE_ENV=production NODE_PATH=. babel-node server.js",
-    "postinstall": "npm link dnd-desk && npm link spec",
-    "init-links": "cd ./src/lib/dnd-desk && npm link && cd ../spec && npm link"
+    "postinstall": "npm run add-links",
+    "init-links": "cd ./src/lib/dnd-desk && npm link && cd ../spec && npm link",
+    "add-links": "npm link dnd-desk && npm link spec"
   },
   "pre-commit": [
     "test-full"
