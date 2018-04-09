@@ -15,7 +15,8 @@
     "flow": "flow check",
     "server:dev": "NODE_ENV=development NODE_PATH=. babel-node server.js",
     "server": "NODE_ENV=production NODE_PATH=. babel-node server.js",
-    "postinstall" : "npm link dnd-desk && npm link spec"
+    "postinstall": "npm link dnd-desk && npm link spec",
+    "init-links": "cd ./src/lib/dnd-desk && npm link && cd ../spec && npm link"
   },
   "pre-commit": [
     "test-full"
@@ -72,8 +73,6 @@
     "react-router": "^4.2.0",
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.2",
-    "styled-components": "^3.2.5",
-    "spec": "file:../src/lib/spec",
-    "dnd-desk": "file:../src/lib/dnd-desk"
+    "styled-components": "^3.2.5"
   }
 }
