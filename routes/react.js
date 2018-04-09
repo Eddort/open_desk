@@ -9,12 +9,11 @@ import createHistory from 'history/createMemoryHistory'
 
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
 
-import Task from '../model/tasks'
+import { Task } from '../model'
 
 export default async (req, res) => {
 	if (process.env.NODE_ENV === 'development') {
 		const task = await Task.getNew("Из и роута реакта")
-		console.log(task)
 		return res.send(`
 			<!doctype html>
 			<html>

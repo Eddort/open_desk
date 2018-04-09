@@ -4,6 +4,8 @@ import webpack from 'webpack';
 import reactRoute from './routes/react';
 
 import mongo from './lib/mongo'
+//прогрев, нужен ли
+import './model'
 
 const app = express();
 
