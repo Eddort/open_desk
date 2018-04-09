@@ -11,13 +11,15 @@
     "build:watch": "npm run build -- --watch",
     "dev:client": "cross-env NODE_ENV=development NODE_PATH=. webpack-dev-server --watch-poll",
     "dev:server": "node server.js",
+    "run-server": "supervisor -e node,js,json -w server.js,routes.js,model,routes,conf app.js",
     "lint": "eslint ./",
     "flow": "flow check",
-    "server:dev": "NODE_ENV=development NODE_PATH=. babel-node server.js",
-    "server": "NODE_ENV=production NODE_PATH=. babel-node server.js",
-    "postinstall": "npm run add-links",
+    "server:dev": "NODE_ENV=development NODE_PATH=. npm run run-server",
+    "server": "NODE_ENV=production NODE_PATH=. npm run run-server",
+    "postinstall": "npm run link-full-reinit",
     "init-links": "cd ./src/lib/dnd-desk && npm link && cd ../spec && npm link",
-    "add-links": "npm link dnd-desk && npm link spec"
+    "add-links": "npm link dnd-desk && npm link spec",
+    "link-full-reinit": "npm run init-links && npm run add-links"
   },
   "pre-commit": [
     "test-full"
@@ -40,6 +42,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "chai-immutable": "^1.6.0",
     "css-loader": "^0.28.11",
@@ -57,6 +60,7 @@
     "react-hot-loader": "^4.0.1",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
+    "supervisor": "^0.12.0",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1",
