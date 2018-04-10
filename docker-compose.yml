@@ -23,6 +23,10 @@ services:
     build:
       context: ./service/nginx
       dockerfile: ./Dockerfile.dev
+    volumes:
+      - "./logs/nginx:/image_logs:rw"
+    logging:
+      driver: json-file
     ports:
       - "3000:80"
     depends_on:
