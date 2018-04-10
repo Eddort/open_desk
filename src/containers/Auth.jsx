@@ -7,7 +7,13 @@ import * as userActions from '../actions/user'
 class Auth extends Component {
 	
 	render() {
-		return <AuthForm/>
+		console.log(this.props)
+		const { match } = this.props
+		return (
+			<AuthForm
+				isLoginTab={ match.params.type === 'login' }
+			/>
+		)
 	}
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
+import { Link as LinkRoouter } from 'react-router-dom'
 
 const FormContainer = styled.div`
 	margin-bottom: 0;
@@ -37,8 +38,8 @@ const Separate = styled.span`
 	line-height: 1.5;
 `;
 
-const Link = styled.button`
-	font-size: ${({ isActive }) => (isActive ? '25px !important' : '15px !important')};
+const Link = styled(LinkRoouter)`
+	font-size: ${({ params }) => (params.isactive ? '25px !important' : '15px !important')};
 	padding: 0 !important;
 `;
 
@@ -53,17 +54,16 @@ export default class AuthForm extends Component {
 	}
 	
 	render() {
-		console.log(this.props)
+		const { isLoginTab } = this.props;
 		// const { name }  = this.props
 		const isDisabledForm = false;
-		const isLoginTab = true;
 		return (
 			<FormContainer>
 				<Form>
 					<AtionsContainer>
-						<Link isActive={ isLoginTab }  disabled={ isLoginTab } className="btn btn-link">Логин</Link>
+						<Link to={ '/auth/login' } params={ { isactive: isLoginTab } } disabled={ isLoginTab } className="btn btn-link">Логин</Link>
 						<Separate>/</Separate>
-						<Link isActive={ !isLoginTab } disabled={ !isLoginTab } className="btn btn-link">Регистрация</Link>
+						<Link to={ '/auth/signup' } params={ { isactive: !isLoginTab } } disabled={ !isLoginTab } className="btn btn-link">Регистрация</Link>
 					</AtionsContainer>
 					<div className="form-group">
 						<Label htmlFor="user-emal">Email address</Label>
