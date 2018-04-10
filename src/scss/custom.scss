@@ -1,3 +1,13 @@
-$body-bg: rgb(160, 158, 185);
+// $body-bg: rgb(160, 158, 185);
 // $body-color: rgba(0, 0, 0, 0.067);
 @import "node_modules/bootstrap/scss/bootstrap";
+
+body, html {
+    height: 100%;
+    background-color: #1b1f26;
+}
+
+.btn.btn-purple {
+    background-color: #3821ff;
+    color: #fff;
+}
