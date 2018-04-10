@@ -11,7 +11,7 @@
     "build:watch": "npm run build -- --watch",
     "dev:client": "cross-env NODE_ENV=development NODE_PATH=. webpack-dev-server --watch-poll",
     "dev:server": "node server.js",
-    "run-server": "supervisor -e node,js,json -w server.js,routes.js,model,routes,config app.js",
+    "run-server": "supervisor -e node,js,json -w server.js,lib,model,routes,config app.js",
     "lint": "eslint ./",
     "flow": "flow check",
     "server:dev": "NODE_ENV=development NODE_PATH=. npm run run-server",

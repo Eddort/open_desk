@@ -11,7 +11,7 @@ class Desk extends Component {
 		const { desk } = this.props
 
 		return <div>
-			<h6> App DESK </h6>
+			<h6> App DESK HEELO</h6>
 			<Board desk={ desk } />
 		</div>
 	}

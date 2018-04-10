@@ -11,4 +11,5 @@ const $ = express.Router();
 // 	res.send('NE OK')
 // })
 $.use('/', dashBoard)
+$.use('*', (req, res) => res.send('404'))
 export default $

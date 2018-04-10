@@ -19,3 +19,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     logging:
       driver: none
+  nginx:
+    build:
+      context: ./service/nginx
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "3000:80"
+    depends_on:
+      - desk
