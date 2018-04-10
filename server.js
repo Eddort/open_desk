@@ -1,8 +1,8 @@
 import path from 'path';
 import express from 'express';
 import webpack from 'webpack';
-import reactRoute from './routes/react';
-
+import routes from './routes'
+import middleware from './lib/middleware'
 import mongo from './lib/mongo'
 //прогрев, нужен ли
 import './model'
@@ -30,8 +30,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.static(path.resolve('./public')));
-
-app.get('*', reactRoute);
+app.use(middleware)
+app.use(routes)
 
 app.set('x-powered-by', false);
 
