@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import './scss/custom.scss'
 import { ConnectedRouter } from 'react-router-redux'
 import { Provider } from 'react-redux'
-import Root from './containers/Root';
+import RootRouter from './routes';
 
 const history = createHistory();
 const store =  configureStore(history, window.__INITIAL_STATE__)
@@ -14,7 +14,7 @@ const store =  configureStore(history, window.__INITIAL_STATE__)
 ReactDOM.render(
 		<Provider store={store}>
 			<ConnectedRouter history={history}>
-				<Root/>
+				<RootRouter/>
 			</ConnectedRouter>
 		</Provider>,
 	document.getElementById('app')

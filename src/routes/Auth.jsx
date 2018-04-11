@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router'
-import Auth from '../Auth';
+import Auth from '../containers/Auth';
 const Router =  () => (
     <div>
     FROM ROUTE
