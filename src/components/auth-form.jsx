@@ -38,8 +38,8 @@ const Separate = styled.span`
 	line-height: 1.5;
 `;
 
-const Link = styled(LinkRoouter)`
-	font-size: ${({ params }) => (params.isactive ? '25px !important' : '15px !important')};
+const Link = styled.button`
+	font-size: ${({ isActive }) => (isActive ? '25px !important' : '15px !important')};
 	padding: 0 !important;
 `;
 
@@ -51,6 +51,18 @@ export default class AuthForm extends Component {
 	
 	constructor(props) {
 		super(props);
+		this.sendForm = (e) => {
+			e.preventDefault()
+			console.log(111)
+			return false
+		}
+		//почему ентер по инпуту делает пуш в хистори
+		this.onKeyPress = (e) => {
+			
+			if (e.key === 'Enter')	{
+				e.preventDefault()
+			}
+		}
 	}
 	
 	render() {
@@ -59,23 +71,34 @@ export default class AuthForm extends Component {
 		const isDisabledForm = false;
 		return (
 			<FormContainer>
-				<Form>
+				<Form onSubmit={ this.sendForm }>
 					<AtionsContainer>
-						<Link to={ '/auth/login' } params={ { isactive: isLoginTab } } disabled={ isLoginTab } className="btn btn-link">Логин</Link>
+						<LinkRoouter to={ '/auth/login' }>
+							<Link isActive={ isLoginTab } disabled={ isLoginTab } className="btn btn-link">Логин</Link>
+						</LinkRoouter>
 						<Separate>/</Separate>
-						<Link to={ '/auth/signup' } params={ { isactive: !isLoginTab } } disabled={ !isLoginTab } className="btn btn-link">Регистрация</Link>
+						<LinkRoouter to={ '/auth/signup' }>
+							<Link  isActive={ !isLoginTab } disabled={ !isLoginTab } className="btn btn-link">Регистрация</Link>
+						</LinkRoouter>
 					</AtionsContainer>
 					<div className="form-group">
-						<Label htmlFor="user-emal">Email address</Label>
-						<input disabled={ isDisabledForm } type="email" className="form-control form-control-lg" id="user-emal" aria-describedby="emailHelp" placeholder="Enter email"/>
+						<Label htmlFor="user-emal">Электронная почта</Label>
+						<input disabled={ isDisabledForm } onKeyPress={ this.onKeyPress } type="email" className="form-control form-control-lg" id="user-emal" aria-describedby="emailHelp"/>
 						{/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
 					</div>
 					<div className="form-group">
-						<Label htmlFor="user-password">Password</Label>
-						<input disabled={ isDisabledForm } type="password" className="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter password"/>
+						<Label htmlFor="user-password">Пароль</Label>
+						<input disabled={ isDisabledForm } onKeyPress={ this.onKeyPress } type="password" className="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp"/>
 						{/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
 					</div>
-					<Button disabled={ isDisabledForm } type="submit" className="btn btn-purple">Submit</Button>
+					<Button 
+						disabled={ isDisabledForm }
+						type="submit"
+						className="btn btn-purple"
+						// onClick={ this.sendForm }
+					>
+						{ (isLoginTab ? 'Логин': 'Регистрация') }
+					</Button>
 				</Form>
 			</FormContainer>
 		)
