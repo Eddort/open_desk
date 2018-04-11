@@ -4,13 +4,15 @@ const path = require('path');
 const ExtractTextPlugin = require ('extract-text-webpack-plugin');
 console.log('!!!!!!!!!!!')
 module.exports = {
+  devtool: '#cheap-module-eval-source-map',
   entry: [
-    'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
     './src/index.js'],
   mode: 'development',
   output: {
     filename: 'app.bundle.js',
     path: path.resolve('./public'),
+    publicPath: 'http://localhost:3000/'
   },
    plugins: [
     new webpack.NamedModulesPlugin(),

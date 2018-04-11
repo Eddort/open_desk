@@ -12,6 +12,7 @@ class Auth extends Component {
 		return (
 			<AuthForm
 				isLoginTab={ match.params.type === 'login' }
+				handleSendForm={ (e)=>{e.preventDefault(); console.log('AUTH')} }
 			/>
 		)
 	}

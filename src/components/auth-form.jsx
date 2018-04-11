@@ -51,27 +51,22 @@ export default class AuthForm extends Component {
 	
 	constructor(props) {
 		super(props);
-		this.sendForm = (e) => {
-			e.preventDefault()
-			console.log(111)
-			return false
-		}
+		const { handleSendForm } = props;
 		//почему ентер по инпуту делает пуш в хистори
 		this.onKeyPress = (e) => {
-			
 			if (e.key === 'Enter')	{
-				e.preventDefault()
+				handleSendForm(e);
 			}
 		}
 	}
 	
 	render() {
-		const { isLoginTab } = this.props;
+		const { isLoginTab, handleSendForm } = this.props;
 		// const { name }  = this.props
 		const isDisabledForm = false;
 		return (
 			<FormContainer>
-				<Form onSubmit={ this.sendForm }>
+				<Form onSubmit={ handleSendForm }>
 					<AtionsContainer>
 						<LinkRoouter to={ '/auth/login' }>
 							<Link isActive={ isLoginTab } disabled={ isLoginTab } className="btn btn-link">Логин</Link>
