@@ -17,7 +17,7 @@ type Props = {
 const Container = styled.a`
 border-radius: ${borderRadius}px;
 border: 1px solid grey;
-background-color: ${({ isDragging }) => (isDragging ? colors.green : colors.white)};
+background-color: ${({ isDragging }) => (isDragging ? colors.green : '#FFFFFF')};
 
 box-shadow: ${({ isDragging }) => (isDragging ? `2px 2px 1px ${colors.shadow}` : 'none')};
 padding: ${grid}px;

@@ -6,10 +6,10 @@ import DashBoardWrapper from '../components/DashBoardWrapper'
 
 const Router =  () => (
     <DashBoardWrapper>
-		<Switch>
-			{/* <Route path="/auth" component={Auth}/> */}
-			<Route exact path="/desk" component={Desk}/>
-		</Switch>
+			<Switch>
+				{/* <Route path="/auth" component={Auth}/> */}
+				<Route exact path="/desk" component={Desk}/>
+			</Switch>
     </DashBoardWrapper>
 ); 
 

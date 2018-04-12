@@ -2,7 +2,7 @@ const webpack       = require('webpack');
 const path = require('path');
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require ('extract-text-webpack-plugin');
-console.log('!!!!!!!!!!!')
+
 module.exports = {
   devtool: '#cheap-module-eval-source-map',
   entry: [
@@ -65,7 +65,10 @@ module.exports = {
       }, {
         loader: 'css-loader', // translates CSS into CommonJS modules
       }]
-    }
+    },{
+       test: /\.(svg|woff|woff2|ttf|eot|otf)([?]?.*)$/,
+       loader: 'file-loader',
+      }
     ]
   },
   // devServer: {

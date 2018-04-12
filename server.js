@@ -30,6 +30,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.static(path.resolve('./public')));
+app.use(express.static(path.resolve('./assets')));
 app.use(middleware)
 app.use(routes)
 
