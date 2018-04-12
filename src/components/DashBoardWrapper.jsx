@@ -36,7 +36,7 @@ const Container = styled.div`
 
 const LeftAside = styled.div`
 	display: flex;
-	width: 250px;
+	width: ${({ leftAsideIsHide }) => (leftAsideIsHide ? '0px' : '250px')};
 	flex-grow: 0;
 	height: 100vh;
 	overflow: hidden;
@@ -45,10 +45,10 @@ const LeftAside = styled.div`
 `;
 
 const RightAside = styled.div`
-	width: calc(100% - 250px);
+	width: ${({ leftAsideIsHide }) => (leftAsideIsHide ? '100%' : 'calc(100% - 250px)')};
 	flex-grow: 1;
 	overflow: auto;
-	margin-left: 250px;
+	margin-left: ${({ leftAsideIsHide }) => (leftAsideIsHide ? '0px' : '250px')};
 	height: calc(100vh - 50px);
 `;
 
@@ -94,7 +94,7 @@ const ArrowBack = styled(RouterLink)`
 
 class DashBoardWrapper extends Component {
 	render () {
-		console.log(this.props)
+		const leftAsideIsHide = false;
 		return (
 			
 			<RootContainer>
@@ -115,7 +115,7 @@ class DashBoardWrapper extends Component {
 					</DashBoardControls>
 				</RootNavBar>
 				<Container>
-					<LeftAside>
+					<LeftAside leftAsideIsHide={ leftAsideIsHide }>
 						<NavBar>
 							<NavLink
 								className="free-link"
@@ -135,7 +135,7 @@ class DashBoardWrapper extends Component {
 							>Личный кабинет</NavLink>
 						</NavBar>
 					</LeftAside>
-					<RightAside>
+					<RightAside leftAsideIsHide={ leftAsideIsHide }>
 						{this.props.children}
 					</RightAside>
 				</Container>
