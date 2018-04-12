@@ -17,8 +17,8 @@ type Props = {
 const Container = styled.a`
 border-radius: ${borderRadius}px;
 border: 1px solid grey;
-background-color: ${({ isDragging }) => (isDragging ? colors.green : '#FFFFFF')};
-
+background-color: #fff;
+opacity:  ${({ isDragging }) => (isDragging ? 0.8 : 1)};
 box-shadow: ${({ isDragging }) => (isDragging ? `2px 2px 1px ${colors.shadow}` : 'none')};
 padding: ${grid}px;
 min-height: 40px;
@@ -34,7 +34,7 @@ color: ${colors.black};
   text-decoration: none;
 }
 &:focus {
-  outline: 2px solid ${colors.purple};
+  outline: 2px solid #00A3F5;
   box-shadow: none;
 }
 

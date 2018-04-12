@@ -11,6 +11,7 @@ import type { Quote } from '../types';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  color: #3b7694;
 `;
 
 const Container = styled.div`
@@ -25,11 +26,11 @@ const Header = styled.div`
   justify-content: center;
   border-top-left-radius: ${borderRadius}px;
   border-top-right-radius: ${borderRadius}px;
-  background-color: ${({ isDragging }) => (isDragging ? colors.blue.lighter : '#EDF1F6')};
+  background-color: ${({ isDragging }) => (isDragging ? '#eef1f5' : '#dbe2e8')};
   transition: background-color 0.1s ease;
 
   &:hover {
-    background-color: ${colors.blue.lighter};
+    background-color: #eef1f5;
   }
 `;
 

@@ -15,7 +15,7 @@ import type {
 } from 'react-beautiful-dnd';
 
 const Wrapper = styled.div`
-  background-color: ${({ isDraggingOver }) => (isDraggingOver ? colors.blue.lighter : colors.blue.light)};
+  background-color: ${({ isDraggingOver }) => (isDraggingOver ? '#eef1f5' : '#dbe2e8')};
   display: flex;
   flex-direction: column;
   opacity: ${({ isDropDisabled }) => (isDropDisabled ? 0.5 : 'inherit')};
