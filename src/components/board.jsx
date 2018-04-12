@@ -25,11 +25,11 @@ export default class User extends Component {
 		// console.log(data.large)
 		const { name, desk }  = this.props
 		return <div>
-		<Button name={this.state.name} handleClick={ this.setCol } />
+		{/* <Button name={this.state.name} handleClick={ this.setCol } /> */}
 			<div>
-				Привет,
+				{/* Привет,
 				
-					{name}
+					{name} */}
 				<Board initial={ desk }/>
 				{/* <input type="text" onInput={ this.setValue }/> */}
 			</div>
