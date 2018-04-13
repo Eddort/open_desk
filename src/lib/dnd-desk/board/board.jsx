@@ -126,7 +126,7 @@ export default class Board extends Component<Props, State> {
         droppableId="board"
         type="COLUMN"
         direction="horizontal"
-        ignoreContainerClipping={Boolean(containerHeight)}
+        ignoreContainerClipping={true}
       >
         {(provided: DroppableProvided) => (
           <Container innerRef={provided.innerRef} {...provided.droppableProps}>

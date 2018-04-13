@@ -47,9 +47,11 @@ const LeftAside = styled.div`
 const RightAside = styled.div`
 	width: ${({ leftAsideIsHide }) => (leftAsideIsHide ? '100%' : 'calc(100% - 250px)')};
 	flex-grow: 1;
-	overflow: auto;
 	margin-left: ${({ leftAsideIsHide }) => (leftAsideIsHide ? '0px' : '250px')};
 	height: calc(100vh - 50px);
+	/* нельзя делать скролл по x из-за деска */
+	overflow-x: hidden;
+	overflow-y: auto;
 `;
 
 const NavBar = styled.div`
