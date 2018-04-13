@@ -15,16 +15,18 @@ type Props = {
 }
 
 const Container = styled.a`
-border-radius: ${borderRadius}px;
-border: 1px solid grey;
+border-radius: 4px;
+/* border: 1px solid grey; */
 background-color: #fff;
 opacity:  ${({ isDragging }) => (isDragging ? 0.8 : 1)};
-box-shadow: ${({ isDragging }) => (isDragging ? `2px 2px 1px ${colors.shadow}` : 'none')};
+/* box-shadow: ${({ isDragging }) => (isDragging ? `2px 2px 1px ${colors.shadow}` : 'none')}; */
+box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 padding: ${grid}px;
 min-height: 40px;
-margin-bottom: ${grid}px;
+margin-bottom: 16px;
 user-select: none;
 transition: background-color 0.1s ease;
+box-sizing: border-box;
 
 /* anchor overrides */
 color: ${colors.black};
@@ -34,7 +36,7 @@ color: ${colors.black};
   text-decoration: none;
 }
 &:focus {
-  outline: 2px solid #00A3F5;
+  border: 2px solid #00A3F5;
   box-shadow: none;
 }
 

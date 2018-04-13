@@ -11,7 +11,10 @@ const projectSchema = new mongoose.Schema({
     //пользователи (агенты) при помощи этого айди добавляют себе проект
 	projectId: {
 		type: mongoose.Schema.Types.ObjectId
-	}
+    },
+    adminId: {
+		type: mongoose.Schema.Types.ObjectId
+    }
 });
 
 projectSchema.statics.getNew = async function (header) {

@@ -1,15 +1,8 @@
 
 import React, { Component } from 'react';
-import { NavLink as RouterNavLink, Link as RouterLink} from 'react-router-dom';
+import { NavLink as RouterNavLink } from 'react-router-dom';
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-
-import { routeActions } from 'react-router-redux'
-
-// import 'font-awesome/css/font-awesome.css'
-
-// import '@fortawesome/fontawesome'
-// fontawesome.config.familyPrefix = 'fab'
 
 const NavLink = styled(RouterNavLink)`
 	color: #fff;
@@ -97,7 +90,9 @@ const DashBoardControls = styled.div`
 const ArrowBack = styled.a`
 	font-size: 20px;
 `;
-
+/**
+ * TODO разбить на пур компоненты
+ */
 class DashBoardWrapper extends Component {
 	constructor (props) {
 		super(props)

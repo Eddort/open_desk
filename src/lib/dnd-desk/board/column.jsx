@@ -15,9 +15,22 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  margin: ${grid}px;
+  margin: 8px 0;
+  padding-right: 8px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 3px;
+    top: 56px;
+    border-right: 1px solid rgba(0,0,0,.15);
+    z-index: 1;
+    width: 0;
+    height: calc(100% - 56px);
+  }
 `;
 
 const Header = styled.div`
@@ -26,9 +39,15 @@ const Header = styled.div`
   justify-content: center;
   border-top-left-radius: ${borderRadius}px;
   border-top-right-radius: ${borderRadius}px;
-  background-color: ${({ isDragging }) => (isDragging ? '#eef1f5' : '#dbe2e8')};
+  background-color: ${({ isDragging }) => (isDragging ? '#eef1f5' : 'transparent')};
   transition: background-color 0.1s ease;
-
+  
+  h4 {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 10px;
+  }
   &:hover {
     background-color: #eef1f5;
   }
