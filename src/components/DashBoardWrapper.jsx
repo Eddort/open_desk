@@ -1,7 +1,11 @@
 
 import React, { Component } from 'react';
 import { NavLink as RouterNavLink, Link as RouterLink} from 'react-router-dom';
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { connect } from 'react-redux'
+
+import { routeActions } from 'react-router-redux'
+
 // import 'font-awesome/css/font-awesome.css'
 
 // import '@fortawesome/fontawesome'
@@ -90,13 +94,27 @@ const DashBoardControls = styled.div`
 	padding: 0 10px 0 10px;
 `;
 
-const ArrowBack = styled(RouterLink)`
+const ArrowBack = styled.a`
 	font-size: 20px;
 `;
 
 class DashBoardWrapper extends Component {
+	constructor (props) {
+		super(props)
+		const getPrevLocation = (loc) => {
+			let nloc = loc.split('/')
+			nloc.splice(-1)
+			return nloc.join('/')
+		}
+		this.goBack = (history) => {
+			history.push(getPrevLocation(history.location.pathname))
+		}
+	}
 	render () {
-		const leftAsideIsHide = false;
+		console.log(this.props)
+		const { name } = this.props.state.user;
+		const { leftAsideIsHide, history } =  this.props;
+		
 		return (
 			
 			<RootContainer>
@@ -107,12 +125,12 @@ class DashBoardWrapper extends Component {
 					</NavBarLogo>
 					<DashBoardControls>
 						<UserNavbarItem>
-							<ArrowBack className="free-link" to="/">
+							<ArrowBack className="free-link" onClick={ this.goBack.bind(this, history) }>
 								<i className="fa fa-arrow-left"></i>
 							</ArrowBack>
 						</UserNavbarItem>
 						<UserNavbarItem>
-							User Name <i className="fa fa-user"></i>
+							{ name } <i className="fa fa-user"></i>
 						</UserNavbarItem>
 					</DashBoardControls>
 				</RootNavBar>
@@ -146,4 +164,8 @@ class DashBoardWrapper extends Component {
 		}
 }
 
-export default DashBoardWrapper;
+const mapStateToProps = (state) => ({
+	state
+})
+
+export default connect(mapStateToProps)(DashBoardWrapper)
