@@ -5,8 +5,8 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding: 20px;
-	min-height: 100vh;
+	padding: 20px 15px 20px 20px;
+	min-height: calc(100vh - 50px);
 `;
 
 const ContainerSettings = styled.div`

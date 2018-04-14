@@ -67,6 +67,8 @@ const NavBarLogo = styled.div`
 	width: 250px;
 	height: 50px;
 	background-color: #2D3C4F;
+	font-size: 20px;
+	font-wieght: bold;
 `;
 
 const UserNavbarItem = styled.div`
@@ -89,6 +91,7 @@ const DashBoardControls = styled.div`
 
 const ArrowBack = styled.a`
 	font-size: 20px;
+	display: ${({ isActive }) => isActive ? 'block': 'none'}
 `;
 /**
  * TODO разбить на пур компоненты
@@ -107,20 +110,24 @@ class DashBoardWrapper extends Component {
 	}
 	render () {
 		console.log(this.props)
-		const { name } = this.props.state.user;
+		const { name } = this.props.user;
 		const { leftAsideIsHide, history } =  this.props;
-		
+		console.log(history.location.pathname)
 		return (
 			
 			<RootContainer>
 				<RootNavBar>
 					<NavBarLogo>
-					<Logo src="/flipboard.svg"/>
-					OpenDesk
+						<Logo src="/flipboard.svg"/>
+						OpenDesk
 					</NavBarLogo>
 					<DashBoardControls>
 						<UserNavbarItem>
-							<ArrowBack className="free-link" onClick={ this.goBack.bind(this, history) }>
+							<ArrowBack 
+								isActive={ history.location.pathname.length > 1 }
+								className="free-link"
+								onClick={ this.goBack.bind(this, history) }
+							>
 								<i className="fa fa-arrow-left"></i>
 							</ArrowBack>
 						</UserNavbarItem>
@@ -160,7 +167,7 @@ class DashBoardWrapper extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	state
+	user: state.user
 })
 
 export default connect(mapStateToProps)(DashBoardWrapper)
