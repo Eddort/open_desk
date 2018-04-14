@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { NavLink as RouterNavLink } from 'react-router-dom';
+import { NavLink as RouterNavLink, Link as RouterLink } from 'react-router-dom';
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
@@ -89,10 +89,15 @@ const DashBoardControls = styled.div`
 	padding: 0 10px 0 10px;
 `;
 
-const ArrowBack = styled.a`
+const ArrowBack = styled(RouterLink)`
 	font-size: 20px;
-	display: ${({ isActive }) => isActive ? 'block': 'none'}
+	display: ${({ params }) => params.isActive ? 'block': 'none'}
 `;
+const AnimatedPage = styled.div`
+	transition: opacity 0.8s;
+	opacity: ${({ isActive }) => isActive ? 1: 0};
+`;
+
 /**
  * TODO разбить на пур компоненты
  */
@@ -107,28 +112,46 @@ class DashBoardWrapper extends Component {
 		this.goBack = (history) => {
 			history.push(getPrevLocation(history.location.pathname))
 		}
+		this.state = {
+			isActive: false
+		}
+		this.animatePage = () => {
+			setTimeout(() => {
+				this.setState({
+					isActive: true
+				})
+			}, 0)
+		}
+	}
+	componentDidMount () {
+		this.animatePage()
+		console.log(2222333)
 	}
 	render () {
 		console.log(this.props)
 		const { name } = this.props.user;
 		const { leftAsideIsHide, history } =  this.props;
+		const  { isActive } = this.state;
 		console.log(history.location.pathname)
 		return (
 			
 			<RootContainer>
 				<RootNavBar>
 					<NavBarLogo>
-						<Logo src="/flipboard.svg"/>
+						<RouterLink to="/">
+							<Logo src="/flipboard.svg"/>
+						</RouterLink>
 						OpenDesk
 					</NavBarLogo>
 					<DashBoardControls>
 						<UserNavbarItem>
-							<ArrowBack 
-								isActive={ history.location.pathname.length > 1 }
+							<ArrowBack
+								to={ '/' }
+								params={ { isActive: history.location.pathname.length > 1 } }
 								className="free-link"
 								onClick={ this.goBack.bind(this, history) }
 							>
-								<i className="fa fa-arrow-left"></i>
+								<i className="fa fa-angle-left"></i> Главная 
 							</ArrowBack>
 						</UserNavbarItem>
 						<UserNavbarItem>
@@ -141,8 +164,8 @@ class DashBoardWrapper extends Component {
 						<NavBar>
 							<NavLink
 								className="free-link"
-								exact to="/"
-							>Проекты</NavLink>
+								exact to="/projects/:projectId"
+							>Проект</NavLink>
 							<NavLink
 								className="free-link"
 								exact to="/desk"
@@ -158,7 +181,9 @@ class DashBoardWrapper extends Component {
 						</NavBar>
 					</LeftAside>
 					<RightAside leftAsideIsHide={ leftAsideIsHide }>
-						{this.props.children}
+						<AnimatedPage isActive={ isActive }>
+							{this.props.children}
+						</AnimatedPage>
 					</RightAside>
 				</Container>
 			</RootContainer>
