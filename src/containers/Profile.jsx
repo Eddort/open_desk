@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Board from '../components/board'
+import Profile from '../components/profile'
 import * as userActions from '../actions/user'
 
 const mapStateToProps = (state) => ({
-	desk: state.desk
+	user: state.user
 })
 
 const mapDispatchToProps = (dispatch) => ({
 	boardActions: bindActionCreators(userActions, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Board)
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

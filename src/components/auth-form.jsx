@@ -61,7 +61,8 @@ export default class AuthForm extends Component {
 	}
 	
 	render() {
-		const { isLoginTab, handleSendForm } = this.props;
+		const { match, handleSendForm } = this.props;
+		const isLoginTab = match.params.type === 'login'
 		// const { name }  = this.props
 		const isDisabledForm = false;
 		return (

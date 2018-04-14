@@ -146,7 +146,7 @@ class DashBoardWrapper extends Component {
 							>Нераспределенные задачи</NavLink>
 							<NavLink
 								className="free-link"
-								to="/desk/backlog"
+								to="/profile"
 							>Личный кабинет</NavLink>
 						</NavBar>
 					</LeftAside>

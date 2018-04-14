@@ -31,6 +31,7 @@ const Container = styled.div`
     width: 0;
     height: calc(100% - 56px);
   }
+
 `;
 
 const Header = styled.div`
