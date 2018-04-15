@@ -36,7 +36,7 @@ const Item = Block.extend`
 	padding: 0;
 	margin-bottom: 10px;
 	flex-grow: 0;
-	
+	height: 300px;
 `;
 
 const ItemContainer = styled.div`
@@ -60,10 +60,14 @@ const TitleContaner = ItemContainer.extend`
 	padding: 10px;
 `;
 
-const ProjectAvatar = styled.i`
+const ProjectAvatarDefault = styled.i`
 	font-size: 70px !important;
 	color: rgba(0,0,0,.3);
 	font-weight: 100 !important;
+`;
+
+const ProjectAvatarCustom = styled.img`
+	width: 100%;
 `;
 
 const StatusBar = ItemContainer.extend`
@@ -76,19 +80,30 @@ export default class Profile extends Component {
 	constructor(props) {
 		super(props);
 	}
-	
+	//https://ulanding.io/img/ulanding/icn-logo.svg
 	render() {
-		const todos = [1,2,3,4,5,6,7,8,9,10];
+		const todos = [{
+			title: 'uKit',
+			id: 1,
+			avatarUrl: '/ukit.svg'
+		}, {
+			title: 'uLanding' ,
+			id: 2,
+			avatarUrl: '/ulanding.svg'
+		}];
 		return (
 			<MainWrapper>
-				{todos.map(projectId => (
-					<Item key={ projectId }>
+				{todos.map(project => (
+					<Item key={ project.id }>
 						
 						<AvatarContainer>
-							< ProjectAvatar className="fa fa-table"/>
+							{ project.avatarUrl ?
+								<ProjectAvatarCustom src={project.avatarUrl}/> :
+								< ProjectAvatarDefault className="fa fa-table"/>
+							}
 						</AvatarContainer>
-						<Link className="free-link" to={ `/projects/${projectId}/` }>
-							<TitleContaner>sadsadsa { projectId }</TitleContaner>
+						<Link className="free-link" to={ `/projects/${project.id}/` }>
+							<TitleContaner> { project.title } </TitleContaner>
 						</Link>
 						<StatusBar></StatusBar>
 					</Item>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 // import { data, Board } from 'dnd-desk'
-
+import UserControls from './userControls';
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -34,6 +34,58 @@ const BlockTitle = styled.div`
 	font-weight: 500;
 `;
 
+const ScrollContent = styled.div`
+	overflow: auto;
+	max-height: 500px;
+`;
+
+const Item = styled.div`
+	padding: 20px;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	display: flex; 
+    justify-content: space-between;
+	&:hover {
+		background-color: #EDF1F6;
+		font-weight: bold;
+	}
+`;
+
+const AddNewItem = Item.extend`
+	justify-content: center;
+	font-size: 20px;
+	color: #00A3F5;
+	cursor: pointer;
+	padding: 10px;
+`;
+
+const ProjectDescription = styled.textarea`
+	width: 100%;
+	height: 250px;
+`;
+
+const fakeUsers = [
+	{
+		name: 'Дмитрий',
+		id: 1,
+		role: null
+	},
+	{
+		name: 'Татьяна',
+		id: 3,
+		role: 'agent'
+	},
+	{
+		name: 'Виктор',
+		id: 2,
+		role: 'editor'
+	},
+	{
+		name: 'Александр',
+		id: 4,
+		role: 'agent'
+	}
+]
+
 export default class Profile extends Component {
 	
 	constructor(props) {
@@ -46,34 +98,53 @@ export default class Profile extends Component {
 				<ContainerSettings>
 					<Block>
 						<BlockTitle>
-							Hello
+							Подключенные пользователи
 						</BlockTitle>
+						<ScrollContent>
+							{ fakeUsers.map(({ name, id, role }) => (
+								<Item key={ id }>
+									{ name }
+									<UserControls role={ role } id={ id } changedHandler={ console.log }/>
+								</Item>
+							)) }
+							<AddNewItem>
+								<i className="fa fa-plus-circle"></i>
+							</AddNewItem>
+						</ScrollContent>
 					</Block>
 				</ContainerSettings>
 				<ContainerSettings>
 					<Block>
 						<BlockTitle>
-							Hello
+							Категории
 						</BlockTitle>
-					</Block>
-					<Block>
-						<BlockTitle>
-							Hello
-						</BlockTitle>
+						<ScrollContent>
+							<Item>
+								Оплата сайтов
+							</Item>
+							<Item>
+								Оплата доменов
+							</Item>
+							<Item>
+								Оплата доменов
+							</Item>
+							<AddNewItem>
+								<i className="fa fa-plus-circle"></i>
+							</AddNewItem>
+						</ScrollContent>
 					</Block>
 				</ContainerSettings>
 				<ContainerSettings>
 					<Block>
 						<BlockTitle>
-							Hello
+							Фоновый рисунок
 						</BlockTitle>
 					</Block>
-				</ContainerSettings>
-				<ContainerSettings>
 					<Block>
 						<BlockTitle>
-							Hello
+							Заголовок и описание
 						</BlockTitle>
+						<ProjectDescription/>
 					</Block>
 				</ContainerSettings>
 			</Wrapper>
