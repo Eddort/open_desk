@@ -12,7 +12,7 @@ module.exports = {
   output: {
     filename: 'app.bundle.js',
     path: path.resolve('./public'),
-    publicPath: 'http://localhost:3000/'
+    publicPath: 'http://localhost:3000/webpack/'
   },
    plugins: [
     new webpack.NamedModulesPlugin(),

@@ -1,8 +1,16 @@
-version: '2'
+version: "3"
+# volumes:
+#   static: ./public
 services:
   desk:
-    volumes:
+    volumes: &appvolumes
+      #only for dev
       - ".:/app:rw"
+      #all place
+      - "./logs:/image_logs"
+      #for prod
+      - "./public:/static_content"
+      - "./assets:/static_content_assets"
     build:
       context: ./
       dockerfile: Dockerfile
@@ -10,24 +18,52 @@ services:
       - "8082:8082"
     depends_on:
       - mongo
+    environment:
+      MONGODB_USER: "admin"
+      MONGODB_DATABASE: "desk"
+      MONGODB_PASS: "123"
+      MONGO_PORT: "27017"
+      MONGO_HOST: "mongo"
+      MONGO_USE_RECONNECT: 'true'
+      MONGO_MAX_CONNECTIONS: 10
   mongo:
     command: mongod
-    image: mongo:3.2.0
+    image: mongo:latest
     ports:
       - "27100:27017"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    logging:
-      driver: none
+      - './data/mongo:/data/db'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=123
+      - MONGO_INITDB_DATABASE=admin
+  jwt-auth:
+    image: eddort/jwt-auth:latest
+    ports:
+      - "8089:8089"
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_USER: "admin"
+      MONGODB_DATABASE: "desk"
+      MONGODB_PASS: "123"
+      MONGO_PORT: "27017"
+      MONGO_HOST: "mongo"
+      MONGO_USE_RECONNECT: 'true'
+      MONGO_MAX_CONNECTIONS: 10
+      SERVICE_PORT: 8089
+      FAIL_REDIRECT_URL: http://localhost:3000/auth/login
+      SUCESS_PROXY_URL: http://desk:8082
+      WHITE_URL: "/auth"
   nginx:
     build:
       context: ./service/nginx
       dockerfile: ./Dockerfile.dev
-    volumes:
-      - "./logs/nginx:/image_logs:rw"
+    volumes: *appvolumes
     logging:
       driver: json-file
     ports:
       - "3000:80"
     depends_on:
       - desk
+      - jwt-auth

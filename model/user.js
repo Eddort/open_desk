@@ -1,23 +1,30 @@
 import mongoose from 'mongoose'
- 
-const userSchema = new mongoose.Schema({
+import loadClass from 'mongoose-class-wrapper'
+import fs from './decorators/fs'
+
+const schema = new mongoose.Schema({
 	name: {
-        type: String
-    },
+		type: String
+	},
 	dateCreate: {
 		type: Date,
 		default: Date.now
 	}
 });
 
-userSchema.statics.getNew = async function (header) {
-	let Task = this;
-	let task = new Task({
-		header,
-		body: 'Hello'
-	})
-	return task.save()
+class User {
+	@fs
+	static getNew = async function (header) {
+		let Task = this;
+		let task = new Task({
+			header,
+			body: 'Hello'
+		})
+		return task.save()
+	}
 }
 
+schema.plugin(loadClass, User);
+const m = mongoose.model('User', schema);
 
-export default mongoose.model('Task', userSchema);
+export default m

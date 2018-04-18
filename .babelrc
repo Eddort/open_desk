@@ -5,8 +5,9 @@
 				"node": "current"
 			}
 		}], 
-	"flow", "react"],
+	"flow", "react", "stage-0"],
 	"plugins": [
+		"transform-decorators-legacy",
 		"syntax-flow",
 		"transform-flow-strip-types",
 		"transform-class-properties",

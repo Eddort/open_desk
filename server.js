@@ -3,12 +3,13 @@ import express from 'express';
 import webpack from 'webpack';
 import routes from './routes'
 import middleware from './lib/middleware'
-import mongo from './lib/mongo'
+import morgan from 'morgan'
+import './lib/mongo'
 //прогрев, нужен ли
 import './model'
 
 const app = express();
-
+app.use(morgan('combined'))
 if (process.env.NODE_ENV === 'development') {
 	
 	const config = require('./webpack.config');
@@ -36,17 +37,12 @@ app.use(routes)
 
 app.set('x-powered-by', false);
 
-const startUp = async () => {
-	await mongo()
-	app.listen(8082, '0.0.0.0', err => {
-		if (err) {
-			console.error(err);
-		} else {
-			console.info('Listening at http://localhost:8082', 'ENV', process.env.NODE_ENV);	
-		}
-	});
-}
-
-startUp()
+app.listen(8082, '0.0.0.0', err => {
+	if (err) {
+		console.error(err);
+	} else {
+		console.info('Listening at http://localhost:8082', 'ENV', process.env.NODE_ENV);	
+	}
+});
 
 process.on('uncaughtException', err => console.log(err.stack));
