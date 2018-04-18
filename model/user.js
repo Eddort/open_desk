@@ -22,6 +22,9 @@ class User {
 		})
 		return task.save()
 	}
+	static getSessionUser(_id) {
+		return this.findOne({_id: mongoose.Types.ObjectId(_id)})
+	}
 }
 
 schema.plugin(loadClass, User);
