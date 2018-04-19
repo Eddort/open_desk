@@ -51,23 +51,36 @@ export default class AuthForm extends Component {
 	
 	constructor(props) {
 		super(props);
-		const { handleSendForm } = props;
+		const { setRegister, setLogin, match } = props;
 		//почему ентер по инпуту делает пуш в хистори
 		this.onKeyPress = (e) => {
-			if (e.key === 'Enter')	{
-				handleSendForm(e);
+			if (e.key === 'Enter')  {
+				e.preventDefault();
+			}
+		},
+		this.handleSend = (e) => {
+			e.preventDefault();
+			const sendData = {
+				password: e.target[3].value,
+				username: e.target[2].value,
+			}
+			
+			if (match.params.type === 'login') {
+				setLogin(sendData)
+			} else {
+				setRegister(sendData)
 			}
 		}
 	}
 	
 	render() {
-		const { match, handleSendForm } = this.props;
+		const { match } = this.props;
 		const isLoginTab = match.params.type === 'login'
 		// const { name }  = this.props
 		const isDisabledForm = false;
 		return (
 			<FormContainer>
-				<Form onSubmit={ handleSendForm }>
+				<Form onSubmit={ this.handleSend }>
 					<AtionsContainer>
 						<LinkRoouter to={ '/auth/login' }>
 							<Link isActive={ isLoginTab } disabled={ isLoginTab } className="btn btn-link">Логин</Link>
@@ -78,8 +91,8 @@ export default class AuthForm extends Component {
 						</LinkRoouter>
 					</AtionsContainer>
 					<div className="form-group">
-						<Label htmlFor="user-emal">Электронная почта</Label>
-						<input disabled={ isDisabledForm } onKeyPress={ this.onKeyPress } type="email" className="form-control form-control-lg" id="user-emal" aria-describedby="emailHelp"/>
+						<Label htmlFor="user-emal">Ваше имя</Label>
+						<input disabled={ isDisabledForm } onKeyPress={ this.onKeyPress } type="text" className="form-control form-control-lg" id="user-emal" aria-describedby="emailHelp"/>
 						{/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
 					</div>
 					<div className="form-group">
