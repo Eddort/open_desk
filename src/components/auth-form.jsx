@@ -51,14 +51,14 @@ export default class AuthForm extends Component {
 	
 	constructor(props) {
 		super(props);
-		const { setRegister, setLogin, match } = props;
+		const { setRegister, setLogin } = props;
 		//почему ентер по инпуту делает пуш в хистори
 		this.onKeyPress = (e) => {
 			if (e.key === 'Enter')  {
 				e.preventDefault();
 			}
 		},
-		this.handleSend = (e) => {
+		this.handleSend = (match, e) => {
 			e.preventDefault();
 			const sendData = {
 				password: e.target[3].value,
@@ -80,7 +80,7 @@ export default class AuthForm extends Component {
 		const isDisabledForm = false;
 		return (
 			<FormContainer>
-				<Form onSubmit={ this.handleSend }>
+				<Form onSubmit={ this.handleSend.bind(this, match) }>
 					<AtionsContainer>
 						<LinkRoouter to={ '/auth/login' }>
 							<Link isActive={ isLoginTab } disabled={ isLoginTab } className="btn btn-link">Логин</Link>
