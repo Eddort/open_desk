@@ -75,6 +75,38 @@ const StatusBar = ItemContainer.extend`
 	height: 25px;
 `;
 
+const AddNew = styled.i`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	font-size: 30px;
+	background-color: #D2D6DA;
+	cursor: pointer;
+`;
+
+const AddFirstProject = styled.div`
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	width: 100%;
+`;
+
+const AddNPContainer = styled.div`
+	width: 300px;
+`;
+
+const BlockContent = styled.div`
+	height: 60px;
+	width: 300px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	color: #000;
+`;
+
+const AddNewButton = styled.button``;
+
 export default class Profile extends Component {
 	
 	constructor(props) {
@@ -82,23 +114,16 @@ export default class Profile extends Component {
 	}
 	//https://ulanding.io/img/ulanding/icn-logo.svg
 	render() {
-		const todos = [{
-			title: 'uKit',
-			id: 1,
-			avatarUrl: '/ukit.svg'
-		}, {
-			title: 'uLanding' ,
-			id: 2,
-			avatarUrl: '/ulanding.svg'
-		}];
+		const { addNewProject = console.log } = this.props
+		const projects = [];
 		return (
 			<MainWrapper>
-				{todos.map(project => (
+				{projects.map(project => (
 					<Item key={ project.id }>
 						
 						<AvatarContainer>
-							{ project.avatarUrl ?
-								<ProjectAvatarCustom src={project.avatarUrl}/> :
+							{ project.avatar ?
+								<ProjectAvatarCustom src={project.avatar}/> :
 								< ProjectAvatarDefault className="fa fa-table"/>
 							}
 						</AvatarContainer>
@@ -109,6 +134,22 @@ export default class Profile extends Component {
 					</Item>
 					
 				))}
+				{ projects && projects.length ? 
+					<Item onClick={ addNewProject }>
+						<AddNew className="fa fa-plus-circle"/>
+					</Item>
+				:
+					<AddFirstProject>
+						<AddNPContainer>
+							<BlockContent>
+								У вас еще нет проекта?
+							</BlockContent>
+							<BlockContent>
+								<AddNewButton onClick ={ addNewProject } className="btn btn-purple">Создать первый проект</AddNewButton>
+							</BlockContent>
+						</AddNPContainer>
+					</AddFirstProject>
+				}
 			</MainWrapper>
 		)
 	}

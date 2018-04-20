@@ -25,7 +25,7 @@ const Label = styled.label`
 `;
 
 const Button = styled.button`
-	padding: 20px;
+	padding: 10px;
 	float: right;
 	top: 100%;
 	font-size: 20px !important;
