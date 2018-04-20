@@ -108,14 +108,10 @@ const BlockContent = styled.div`
 const AddNewButton = styled.button``;
 
 export default class Profile extends Component {
-	
-	constructor(props) {
-		super(props);
-	}
 	//https://ulanding.io/img/ulanding/icn-logo.svg
 	render() {
-		const { projects, addNewProject = console.log } = this.props
-		console.log(projects)
+		const { projects, addNewProject } = this.props
+		console.log(projects, '222333')
 		return (
 			<MainWrapper>
 				{projects.map(project => (
@@ -127,7 +123,7 @@ export default class Profile extends Component {
 								< ProjectAvatarDefault className="fa fa-table"/>
 							}
 						</AvatarContainer>
-						<Link className="free-link" to={ `/projects/${project.uid}/` }>
+						<Link className="free-link" to={ `/project/${project.uid}/` }>
 							<TitleContaner> { project.title } </TitleContaner>
 						</Link>
 						<StatusBar></StatusBar>

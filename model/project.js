@@ -66,4 +66,10 @@ export default class Project {
 	static async getAllAvail({ userId }) {
 		return this.find({ userIds: userId })
 	}
+	static async getByUid(uid) {
+		return this.findOne({ uid })
+	}
+	static async getAvailProject({ uid }) {
+		return this.findOne({ uid })
+	}
 }

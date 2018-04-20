@@ -164,7 +164,7 @@ class DashBoardWrapper extends Component {
 						<NavBar>
 							<NavLink
 								className="free-link"
-								exact to="/projects/:projectId"
+								exact to="/project/:projectId"
 							>Проект</NavLink>
 							<NavLink
 								className="free-link"

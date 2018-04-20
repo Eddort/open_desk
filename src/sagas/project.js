@@ -1,9 +1,12 @@
-import { call, takeEvery, fork } from 'redux-saga/effects'
+import { call, put, takeEvery, fork } from 'redux-saga/effects'
 import api from '../lib/api'
-
+import { updateList } from '../actions/project'
 function* getNewProject(action) {
 	try {
 		yield call(api, { url:'/add', data: action.payload });
+		const { data }  = yield call(api, { url:'/' });
+		console.log(data.projects)
+		yield put(updateList(data.projects))
 		// window.location.href = '/'
 		// const user = action.payload
 		// yield put({type: "USER_REGISTER", user});
