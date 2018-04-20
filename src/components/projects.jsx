@@ -114,12 +114,12 @@ export default class Profile extends Component {
 	}
 	//https://ulanding.io/img/ulanding/icn-logo.svg
 	render() {
-		const { addNewProject = console.log } = this.props
-		const projects = [];
+		const { projects, addNewProject = console.log } = this.props
+		console.log(projects)
 		return (
 			<MainWrapper>
 				{projects.map(project => (
-					<Item key={ project.id }>
+					<Item key={ project.uid }>
 						
 						<AvatarContainer>
 							{ project.avatar ?
@@ -127,7 +127,7 @@ export default class Profile extends Component {
 								< ProjectAvatarDefault className="fa fa-table"/>
 							}
 						</AvatarContainer>
-						<Link className="free-link" to={ `/projects/${project.id}/` }>
+						<Link className="free-link" to={ `/projects/${project.uid}/` }>
 							<TitleContaner> { project.title } </TitleContaner>
 						</Link>
 						<StatusBar></StatusBar>

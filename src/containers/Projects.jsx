@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import Projects from '../components/projects'
-import * as userActions from '../actions/user'
+import { getNew } from '../actions/project'
 
 const mapStateToProps = (state) => ({
-	user: state.user
+	user: state.user,
+	projects: state.projects
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	boardActions: bindActionCreators(userActions, dispatch)
+	addNewProject: () => dispatch(getNew())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Projects)

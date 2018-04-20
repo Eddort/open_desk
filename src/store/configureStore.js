@@ -6,7 +6,7 @@ import rootSaga from '../sagas'
 
 let defaultInitState = {}
 
-if (typeof window !== undefined && window.__initialState__) {
+if (typeof window === 'object' && window.__initialState__) {
 	defaultInitState = window.__initialState__
 }
 
