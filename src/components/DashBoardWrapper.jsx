@@ -129,7 +129,7 @@ class DashBoardWrapper extends Component {
 	}
 	render () {
 		console.log(this.props)
-		const { name } = this.props.user;
+		const { username } = this.props.user;
 		const { leftAsideIsHide, history } =  this.props;
 		const  { isActive } = this.state;
 		console.log(history.location.pathname)
@@ -151,11 +151,11 @@ class DashBoardWrapper extends Component {
 								className="free-link"
 								onClick={ this.goBack.bind(this, history) }
 							>
-								<i className="fa fa-angle-left"></i> Главная 
+								<i className="fa fa-angle-left"></i> Проекты 
 							</ArrowBack>
 						</UserNavbarItem>
 						<UserNavbarItem>
-							{ name } <i className="fa fa-user"></i>
+							{ username } <i className="fa fa-user"></i>
 						</UserNavbarItem>
 					</DashBoardControls>
 				</RootNavBar>

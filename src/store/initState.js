@@ -1,10 +1,10 @@
 import desk from './desk'
 
 const baseState = {
-    desk: desk.medium,
-    user: {
-        name: 'test'
-    }
+	desk: desk.medium,
+	user: {
+		username: 'test'
+	}
 }
 
 export default baseState

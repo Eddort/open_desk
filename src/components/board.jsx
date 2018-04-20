@@ -23,7 +23,7 @@ export default class User extends Component {
 	
 	render() {
 		// console.log(data.large)
-		const { name, desk }  = this.props
+		const { username, desk }  = this.props
 		return <div>
 		{/* <Button name={this.state.name} handleClick={ this.setCol } /> */}
 			<div>

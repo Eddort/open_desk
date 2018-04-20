@@ -4,7 +4,10 @@ const $ = express.Router()
 $.get('/', (req, res) => {
 	const { url } = req;
 	return res.react({
-		url
+		url,
+		initialState: {
+			user: req.o.user
+		}
 	})
 })
 
