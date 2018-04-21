@@ -7,9 +7,10 @@ import './scss/custom.scss'
 import { ConnectedRouter } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import RootRouter from './routes';
+import initialState from './store/initialState'
 
 const history = createHistory();
-const store =  configureStore(history, window.__INITIAL_STATE__)
+const store =  configureStore(history, initialState)
 
 ReactDOM.render(
 		<Provider store={store}>

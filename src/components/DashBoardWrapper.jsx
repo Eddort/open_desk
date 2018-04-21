@@ -95,8 +95,30 @@ const ArrowBack = styled(RouterLink)`
 `;
 const AnimatedPage = styled.div`
 	transition: opacity 0.8s;
+	height: 100%;
 	opacity: ${({ isActive }) => isActive ? 1: 0};
 `;
+
+const LoaderContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #3821ff;
+	height: 100%;
+	font-size: 40px;
+	& > i {
+		animation: 2s rotate linear infinite 0s;
+		@keyframes rotate {
+			0% {
+				transform:rotate(0deg);
+			}
+			100% {
+				transform:rotate(360deg);
+			}
+		}
+	}
+`;
+
 
 /**
  * TODO разбить на пур компоненты
@@ -125,14 +147,15 @@ class DashBoardWrapper extends Component {
 	}
 	componentDidMount () {
 		this.animatePage()
-		console.log(2222333)
 	}
 	render () {
-		console.log(this.props)
+		console.log(this.props, '!!!!!!')
 		const { username } = this.props.user;
-		const { leftAsideIsHide, history } =  this.props;
-		const  { isActive } = this.state;
-		console.log(history.location.pathname)
+		const { leftAsideIsHide, history, project } =  this.props
+		const  { loadInProgress } = this.props.page;
+		const { isActive } = this.state
+		const isIndexPage = history.location.pathname.length > 1
+
 		return (
 			
 			<RootContainer>
@@ -141,13 +164,13 @@ class DashBoardWrapper extends Component {
 						<RouterLink to="/">
 							<Logo src="/flipboard.svg"/>
 						</RouterLink>
-						OpenDesk
+						{ isIndexPage && project && project.title ? project.title : 'OpenDesk' }
 					</NavBarLogo>
 					<DashBoardControls>
 						<UserNavbarItem>
 							<ArrowBack
 								to={ '/' }
-								params={ { isActive: history.location.pathname.length > 1 } }
+								params={ { isActive: isIndexPage } }
 								className="free-link"
 								onClick={ this.goBack.bind(this, history) }
 							>
@@ -164,25 +187,30 @@ class DashBoardWrapper extends Component {
 						<NavBar>
 							<NavLink
 								className="free-link"
-								exact to="/project/:projectId"
+								exact to={`/project/${project.uid}`}
 							>Проект</NavLink>
 							<NavLink
 								className="free-link"
-								exact to="/desk"
+								exact to={`/project/${project.uid}/desk`}
 							>Задачи</NavLink>
 							<NavLink
 								className="free-link"
 								to="/desk/backlog"
 							>Нераспределенные задачи</NavLink>
-							<NavLink
+							{/* <NavLink
 								className="free-link"
 								to="/profile"
-							>Личный кабинет</NavLink>
+							>Личный кабинет</NavLink> */}
 						</NavBar>
 					</LeftAside>
 					<RightAside leftAsideIsHide={ leftAsideIsHide }>
 						<AnimatedPage isActive={ isActive }>
-							{this.props.children}
+							{ ! loadInProgress ?
+								this.props.children :
+								<LoaderContainer>
+									<i className="fa fa-spinner"></i>
+								</LoaderContainer>
+							}
 						</AnimatedPage>
 					</RightAside>
 				</Container>
@@ -192,7 +220,9 @@ class DashBoardWrapper extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	user: state.user
+	user: state.user,
+	project: state.project,
+	page: state.page
 })
 
 export default connect(mapStateToProps)(DashBoardWrapper)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router'
 import Profile from '../containers/Profile'
+import Desk from '../containers/Desk'
 //формирует сетку для дашборда
 import DashBoardWrapper from '../components/DashBoardWrapper'
 
@@ -11,7 +12,8 @@ class Router extends Component {
 			<DashBoardWrapper history={ this.props.history }>
 				<Switch>
 					{/* <Route path="/auth" component={Auth}/> */}
-					<Route exact path="/projects/:projectId" component={Profile}/>
+					<Route exact path="/project/:projectId" component={Profile}/>
+					<Route exact path="/project/:projectId/desk" component={Desk}/>
 				</Switch>
 			</DashBoardWrapper>
 		)
