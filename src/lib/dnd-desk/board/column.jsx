@@ -69,7 +69,7 @@ export default class Column extends Component<Props> {
     const index: number = this.props.index;
     const authors: any = this.props.authors;
     return (
-      <Draggable draggableId={title} index={index}>
+      <Draggable isDragDisabled={ true } draggableId={title} index={index}>
         {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
           <Wrapper>
             <Container

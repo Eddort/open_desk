@@ -1,7 +1,6 @@
 import { merge } from 'lodash'
 
 const initialState = {
-	name: 'NAMыыE'
 };
 const NAME = 'project'
 

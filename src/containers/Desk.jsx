@@ -4,7 +4,7 @@ import Board from '../components/board'
 import * as userActions from '../actions/user'
 
 const mapStateToProps = (state) => ({
-	desk: state.desk
+	desk: console.log(state.desk, '!!!') || state.desk
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -75,7 +75,8 @@ class InnerQuoteList extends Component<QuoteListProps> {
 
     return (
       <div>
-        {this.props.quotes.map((quote: Quote, index: number) => (
+        {this.props.quotes.map ? 
+        this.props.quotes.map((quote: Quote, index: number) => (
           <Draggable isDragDisabled={ false } key={quote.id} draggableId={quote.id} index={index}>
             {(dragProvided: DraggableProvided, dragSnapshot: DraggableStateSnapshot) => (
               <div>
@@ -91,7 +92,7 @@ class InnerQuoteList extends Component<QuoteListProps> {
               </div>
           )}
           </Draggable>
-        ))}
+        )) : ''}
       </div>
     );
   }
