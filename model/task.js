@@ -1,7 +1,7 @@
-import { model } from 'mongoose-decorators'
-import mongoose from 'mongoose'
-
-@model({
+//@flow
+import mongoose, { Schema } from 'mongoose'
+import type { ObjectId } from 'mongoose'
+const TaskSchema = new Schema({
 	header: {
 		type: String,
 		required: true
@@ -11,16 +11,17 @@ import mongoose from 'mongoose'
 		default: () => Math.random().toString(35).substr(2, 9),
 		unique: true
 	},
-	deskId: mongoose.Schema.Types.ObjectId,
-	projectId: mongoose.Schema.Types.ObjectId,
+	deskId: Schema.Types.ObjectId,
+	projectId: Schema.Types.ObjectId,
 	assigned: {
-		type: mongoose.Schema.Types.ObjectId
+		type: Schema.Types.ObjectId
 	},
 	//user uid
 	authorId: {
 		type: String,
 		required: true
 	},
+	url: String,
 	content: {
 		type: String
 	},
@@ -37,32 +38,35 @@ import mongoose from 'mongoose'
 		default: Date.now
 	}
 }, {
-	autoIndex: true
+	autoIndex: true 
 })
-export default class Task {
-	content: String;
-	static async getNew({ column, deskId, projectId, content, authorId, url, header }) {
+
+class Task /* :: extends Mongoose$Document */ {
+	content: string
+	header: string
+	uid: string
+	authorId: string
+	dateCreate: Date
+	order: number
+	column: string
+	deskId: ObjectId
+	projectId: ObjectId
+	url: string
+	static async getNew({ column, deskId, projectId, content, authorId, url, header }: Object): Promise<Task> {
 		let Task = this
 		const countTasks = await Task.count({ column, projectId, authorId })
 		if (! header) {
 			header = `Новая задача ${countTasks + 1}`
 		}
-		const task = new Task({
-			header, column, deskId, projectId, content, authorId, url, order: countTasks + 1
-		})
+		const task = new Task({ header, column, deskId, projectId, content, authorId, url: url, order: countTasks + 1 })
 		return task.save()
 	}
-	static findAllDeskTasks(deskId: String) {
-		this.content = {}
+	static findAllDeskTasks(deskId: ObjectId): Promise<Array<Task>> {
 		return this.find({ deskId })
 	}
-	test(){
-		this.content = 123
-		
-	}
-	static async getAllDeskTasks(deskId: String): Object {
+	static async getAllDeskTasks(deskId: ObjectId): Object {
 		const tasks = await this.findAllDeskTasks(deskId)
-		tasks[0].content = 123
+		// tasks[0].content = 2222
 		if (! tasks.length) {
 			return {}
 		}
@@ -76,3 +80,6 @@ export default class Task {
 		}, {})
 	}
 }
+
+TaskSchema.loadClass(Task);
+export default mongoose.model('Task', TaskSchema);
