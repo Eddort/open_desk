@@ -132,13 +132,13 @@ export default class QuoteItem extends React.PureComponent<Props> {
         
         <Content>
           <QuoteWrapp>
-            <HeaderQuote>{author.name}</HeaderQuote>
+            <HeaderQuote>{quote.header}</HeaderQuote>
             <Avatar src={author.avatarUrl} alt={author.name} />
           </QuoteWrapp>
           <BlockQuote>{quote.content}</BlockQuote>
           <QuoteWrapp>
-            <QuoteId>(id: {quote.id})</QuoteId>
-            <Attribution>{author.name}</Attribution>
+            <QuoteId>(id: {quote.uid})</QuoteId>
+            <Attribution>{author.username}</Attribution>
           </QuoteWrapp>
         </Content>
        

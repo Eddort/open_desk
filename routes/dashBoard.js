@@ -3,6 +3,7 @@ import { data } from 'dnd-desk'
 // import { Project } from '../model'
 import hre from '../lib/handleRouteError'
 import { Desk } from '../model'
+import { Task } from '../model'
 const $ = express.Router()
 
 $.get('/', hre(async (req, res) => {
@@ -26,14 +27,15 @@ $.post('/', hre(async (req, res) => {
 
 $.get('/desk', hre(async (req, res) => {
 	const { url } = req;
-	await Desk.getNew({ header: 'Test desk', projectId: req.o.project._id })
-	const desk = await Desk.getOneByProjectId({ projectId: req.o.project._id })
+	const _desk = await Desk.getNew({ header: 'Test desk', projectId: req.o.project._id })
+	await Task.getNew({ column: 'backlog', deskId: _desk._id, projectId:req.o.project._id, content:'test', authorId: req.o.user.uid, url:'/' })
+	const desk = await Desk.getOneByProjectId({ projectId: req.o.project._id, _id: _desk._id, user: req.o.user })
 	return res.react({
 		url,
 		initialState: {
 			user: req.o.user,
 			project: req.o.project,
-			desk:  data.medium
+			desk: desk
 		}
 	})
 }))

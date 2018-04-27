@@ -9,21 +9,22 @@ const schema = new mongoose.Schema({
 	dateCreate: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	uid: {
+		type: String,
+		unique: true
+	},
 });
 
 class User {
 	@fs
-	static getNew = async function (header) {
-		let Task = this;
-		let task = new Task({
-			header,
-			body: 'Hello'
-		})
-		return task.save()
-	}
-	static getSessionUser(_id) {
-		return this.findOne({_id: mongoose.Types.ObjectId(_id)})
+	static async getSessionUser(_id) {
+		const user = await this.findOne({_id: mongoose.Types.ObjectId(_id)})
+		if (user && ! user.uid) {
+			user.uid = Math.random().toString(35).substr(2, 9)
+			return user.save()
+		}
+		return user
 	}
 }
 

@@ -17,7 +17,10 @@ import mongoose from 'mongoose'
 		type: mongoose.Schema.Types.ObjectId
 	},
 	//user uid
-	authorId: String,
+	authorId: {
+		type: String,
+		required: true
+	},
 	content: {
 		type: String
 	},
@@ -37,18 +40,39 @@ import mongoose from 'mongoose'
 	autoIndex: true
 })
 export default class Task {
-	static async getNew({ column, deskId, projectId, content, authorId, url }) {
+	content: String;
+	static async getNew({ column, deskId, projectId, content, authorId, url, header }) {
 		let Task = this
 		const countTasks = await Task.count({ column, projectId, authorId })
+		if (! header) {
+			header = `Новая задача ${countTasks + 1}`
+		}
 		const task = new Task({
-			column, deskId, projectId, content, authorId, url, order: countTasks + 1
+			header, column, deskId, projectId, content, authorId, url, order: countTasks + 1
 		})
 		return task.save()
 	}
-	static findAllDeskTasks(deskId) {
+	static findAllDeskTasks(deskId: String) {
+		this.content = {}
 		return this.find({ deskId })
 	}
-	static async getAllDeskTasks(deskId) {
+	test(){
+		this.content = 123
+		
+	}
+	static async getAllDeskTasks(deskId: String): Object {
 		const tasks = await this.findAllDeskTasks(deskId)
+		tasks[0].content = 123
+		if (! tasks.length) {
+			return {}
+		}
+		return tasks.reduce((accum, task) => {
+			let { column } = task
+			if (! accum[column]) {
+				accum[column] = []
+			}
+			accum[column].push(task)
+			return accum
+		}, {})
 	}
 }

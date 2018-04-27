@@ -1,6 +1,6 @@
 import { model } from 'mongoose-decorators'
 import mongoose from 'mongoose'
-
+import Task from './task'
 const COL_FIELD_NAME = 'quotes'
 
 @model({
@@ -35,11 +35,15 @@ export default class Desk {
 		const desk = new Desk({ header, projectId })
 		return desk.save()
 	}
-	static async getOneByProjectId(projectId) {
-		const desk = await this.findOne(projectId)
+	static async getOneByProjectId({projectId, _id, user}) {
+		let Desk = this
+		const desk = await Desk.findOne({projectId, _id})
+		const tasks = await Task.getAllDeskTasks(desk._id)
 		return {
-			[COL_FIELD_NAME]: desk.prepareDataForView(),
-			authors: {}
+			[COL_FIELD_NAME]: tasks,
+			authors: {
+				[user.uid]: user
+			}
 		}
 		
 	}
