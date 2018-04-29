@@ -1,45 +1,52 @@
 //@flow
 import mongoose, { Schema } from 'mongoose'
 import type { ObjectId } from 'mongoose'
-const TaskSchema = new Schema({
-	header: {
-		type: String,
-		required: true
+
+const TaskSchema = new Schema(
+	{
+		header: {
+			type: String,
+			required: true
+		},
+		uid: {
+			type: String,
+			default: () =>
+				Math.random()
+					.toString(35)
+					.substr(2, 9),
+			unique: true
+		},
+		deskId: Schema.Types.ObjectId,
+		projectId: Schema.Types.ObjectId,
+		assigned: {
+			type: Schema.Types.ObjectId
+		},
+		//user uid
+		authorId: {
+			type: String,
+			required: true
+		},
+		url: String,
+		content: {
+			type: String
+		},
+		column: {
+			type: String,
+			required: true
+		},
+		order: {
+			type: Number,
+			required: true
+		},
+		dateCreate: {
+			type: Date,
+			default: Date.now
+		}
 	},
-	uid: {
-		type: String,
-		default: () => Math.random().toString(35).substr(2, 9),
-		unique: true
-	},
-	deskId: Schema.Types.ObjectId,
-	projectId: Schema.Types.ObjectId,
-	assigned: {
-		type: Schema.Types.ObjectId
-	},
-	//user uid
-	authorId: {
-		type: String,
-		required: true
-	},
-	url: String,
-	content: {
-		type: String
-	},
-	column: {
-		type: String,
-		required: true
-	},
-	order: {
-		type: Number,
-		required: true
-	},
-	dateCreate: {
-		type: Date,
-		default: Date.now
+	{
+		autoIndex: true
 	}
-}, {
-	autoIndex: true 
-})
+)
 
 class Task /* :: extends Mongoose$Document */ {
 	content: string
@@ -52,27 +59,45 @@ class Task /* :: extends Mongoose$Document */ {
 	deskId: ObjectId
 	projectId: ObjectId
 	url: string
-	static async getNew({ column, deskId, projectId, content, authorId, url, header }: Object): Promise<Task> {
+	static async getNew ({
+		column,
+		deskId,
+		projectId,
+		content,
+		authorId,
+		url,
+		header
+	}: Object): Promise<Task> {
 		let Task = this
 		const countTasks = await Task.count({ column, projectId, authorId })
-		if (! header) {
+		if (!header) {
 			header = `Новая задача ${countTasks + 1}`
 		}
-		const task = new Task({ header, column, deskId, projectId, content, authorId, url: url, order: countTasks + 1 })
+		const task = new Task({
+			header,
+			column,
+			deskId,
+			projectId,
+			content,
+			authorId,
+			url: url,
+			order: countTasks + 1
+		})
 		return task.save()
 	}
-	static findAllDeskTasks(deskId: ObjectId): Promise<Array<Task>> {
+	static findAllDeskTasks (deskId: ObjectId): Promise<Array<Task>> {
 		return this.find({ deskId })
 	}
-	static async getAllDeskTasks(deskId: ObjectId): Object {
+	static async getAllDeskTasks (deskId: ObjectId): Object {
 		const tasks = await this.findAllDeskTasks(deskId)
-		// tasks[0].content = 2222
-		if (! tasks.length) {
+		if (!tasks.length) {
 			return {}
 		}
+		console.log(2222)
 		return tasks.reduce((accum, task) => {
 			let { column } = task
-			if (! accum[column]) {
+
+			if (!accum[column]) {
 				accum[column] = []
 			}
 			accum[column].push(task)
@@ -81,5 +106,5 @@ class Task /* :: extends Mongoose$Document */ {
 	}
 }
 
-TaskSchema.loadClass(Task);
-export default mongoose.model('Task', TaskSchema);
+TaskSchema.loadClass(Task)
+export default mongoose.model('Task', TaskSchema)

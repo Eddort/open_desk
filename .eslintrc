@@ -11,16 +11,19 @@
   ],
   "rules": {
     "no-debugger": 0,
-    "no-console": 0,
+    "no-console": 1,
     "new-cap": 0,
     "strict": 0,
     "no-underscore-dangle": 0,
     "no-use-before-define": 0,
     "eol-last": 0,
-    "quotes": 0,
+    "quotes": ["error", "single"],
     "jsx-quotes": [0, "prefer-single"],
     "react/jsx-no-undef": 1,
     "react/jsx-uses-react": 1,
-    "react/jsx-uses-vars": 1
+	"react/jsx-uses-vars": 1,
+	"no-extra-parens": ["error", "all", { "nestedBinaryExpressions": false }],
+	"space-before-function-paren": ["error", "always"],
+	"single-quote": true
   }
 }
