@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
 import { Link as LinkRoouter } from 'react-router-dom'
 
 const FormContainer = styled.div`
 	margin-bottom: 0;
 	display: flex;
-	align-items : center;
+	align-items: center;
 	width: 100%;
-	justify-content : center;
+	justify-content: center;
 	min-height: 100%;
 	min-height: 100vh;
-`;
+`
 
 const Form = styled.form`
 	padding: 20px;
@@ -18,11 +18,11 @@ const Form = styled.form`
 	border-radius: 0.25rem;
 	width: 500px;
 	height: 350px;
-`;
+`
 
 const Label = styled.label`
 	color: #879195;
-`;
+`
 
 const Button = styled.button`
 	padding: 10px;
@@ -30,83 +30,109 @@ const Button = styled.button`
 	top: 100%;
 	font-size: 20px !important;
 	margin-top: 20px !important;
-`;
+`
 
 const Separate = styled.span`
 	margin: 0 10px 0 10px;
 	font-size: 25px;
 	line-height: 1.5;
-`;
+`
 
 const Link = styled.button`
-	font-size: ${({ isActive }) => (isActive ? '25px !important' : '15px !important')};
+	font-size: ${({ isActive }) =>
+		isActive ? '25px !important' : '15px !important'};
 	padding: 0 !important;
-`;
+`
 
 const AtionsContainer = styled.div`
 	padding-bottom: 15px;
-`;
+`
 
 export default class AuthForm extends Component {
-	
-	constructor(props) {
-		super(props);
-		const { setRegister, setLogin } = props;
+	constructor (props) {
+		super(props)
+		const { setRegister, setLogin } = props
 		//почему ентер по инпуту делает пуш в хистори
-		this.onKeyPress = (e) => {
-			if (e.key === 'Enter')  {
-				e.preventDefault();
+		;this.onKeyPress = e => {
+			if (e.key === 'Enter') {
+				e.preventDefault()
 			}
 		},
-		this.handleSend = (match, e) => {
-			e.preventDefault();
-			const sendData = {
-				password: e.target[3].value,
-				username: e.target[2].value,
+			this.handleSend = (match, e) => {
+				e.preventDefault()
+				const sendData = {
+					password: e.target[3].value,
+					username: e.target[2].value
+				}
+
+				if (match.params.type === 'login') {
+					setLogin(sendData)
+				} else {
+					setRegister(sendData)
+				}
 			}
-			
-			if (match.params.type === 'login') {
-				setLogin(sendData)
-			} else {
-				setRegister(sendData)
-			}
-		}
 	}
-	
-	render() {
-		const { match } = this.props;
+
+	render () {
+		const { match } = this.props
 		const isLoginTab = match.params.type === 'login'
 		// const { name }  = this.props
-		const isDisabledForm = false;
+		const isDisabledForm = false
 		return (
 			<FormContainer>
-				<Form onSubmit={ this.handleSend.bind(this, match) }>
+				<Form onSubmit={this.handleSend.bind(this, match)}>
 					<AtionsContainer>
-						<LinkRoouter to={ '/auth/login' }>
-							<Link isActive={ isLoginTab } disabled={ isLoginTab } className="btn btn-link">Логин</Link>
+						<LinkRoouter to={'/auth/login'}>
+							<Link
+								isActive={isLoginTab}
+								disabled={isLoginTab}
+								className="btn btn-link"
+							>
+								Логин
+							</Link>
 						</LinkRoouter>
 						<Separate>/</Separate>
-						<LinkRoouter to={ '/auth/signup' }>
-							<Link  isActive={ !isLoginTab } disabled={ !isLoginTab } className="btn btn-link">Регистрация</Link>
+						<LinkRoouter to={'/auth/signup'}>
+							<Link
+								isActive={!isLoginTab}
+								disabled={!isLoginTab}
+								className="btn btn-link"
+							>
+								Регистрация
+							</Link>
 						</LinkRoouter>
 					</AtionsContainer>
 					<div className="form-group">
 						<Label htmlFor="user-emal">Ваше имя</Label>
-						<input disabled={ isDisabledForm } onKeyPress={ this.onKeyPress } type="text" className="form-control form-control-lg" id="user-emal" aria-describedby="emailHelp"/>
+						<input
+							disabled={isDisabledForm}
+							onKeyPress={this.onKeyPress}
+							type="text"
+							className="form-control form-control-lg"
+							id="user-emal"
+							aria-describedby="emailHelp"
+						/>
 						{/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
 					</div>
 					<div className="form-group">
 						<Label htmlFor="user-password">Пароль</Label>
-						<input disabled={ isDisabledForm } onKeyPress={ this.onKeyPress } type="password" className="form-control form-control-lg" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+						<input
+							disabled={isDisabledForm}
+							onKeyPress={this.onKeyPress}
+							type="password"
+							className="form-control form-control-lg"
+							id="exampleInputEmail1"
+							aria-describedby="emailHelp"
+						/>
 						{/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
 					</div>
-					<Button 
-						disabled={ isDisabledForm }
+					<Button
+						disabled={isDisabledForm}
 						type="submit"
 						className="btn btn-purple"
 						// onClick={ this.sendForm }
 					>
-						{ (isLoginTab ? 'Логин': 'Регистрация') }
+						{isLoginTab ? 'Логин' : 'Регистрация'}
 					</Button>
 				</Form>
 			</FormContainer>

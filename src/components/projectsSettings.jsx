@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import styled from 'styled-components'
 // import { data, Board } from 'dnd-desk'
 
@@ -7,12 +7,12 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	padding: 20px 15px 20px 20px;
 	min-height: calc(100vh - 50px);
-`;
+`
 
 const ContainerSettings = styled.div`
 	display: flex;
 	margin: 5px 0;
-`;
+`
 
 const Block = styled.div`
 	background-color: green;
@@ -22,58 +22,47 @@ const Block = styled.div`
 	background-color: #fff;
 	color: #000;
 	min-height: 300px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1);
-`;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
+`
 
 const BlockTitle = styled.div`
-	background-color: #EDF1F6;
+	background-color: #edf1f6;
 	padding: 10px;
-	border-bottom: 1px solid rgba(0,0,0,0.1);
-	color: #6A798C;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	color: #6a798c;
 	font-size: 20px;
 	font-weight: 500;
-`;
+`
 
 export default class Profile extends Component {
-	
-	constructor(props) {
-		super(props);
+	constructor (props) {
+		super(props)
 	}
-	
-	render() {
+
+	render () {
 		return (
 			<Wrapper>
 				<ContainerSettings>
 					<Block>
-						<BlockTitle>
-							Hello
-						</BlockTitle>
+						<BlockTitle>Hello</BlockTitle>
 					</Block>
 				</ContainerSettings>
 				<ContainerSettings>
 					<Block>
-						<BlockTitle>
-							Hello
-						</BlockTitle>
+						<BlockTitle>Hello</BlockTitle>
 					</Block>
 					<Block>
-						<BlockTitle>
-							Hello
-						</BlockTitle>
+						<BlockTitle>Hello</BlockTitle>
 					</Block>
 				</ContainerSettings>
 				<ContainerSettings>
 					<Block>
-						<BlockTitle>
-							Hello
-						</BlockTitle>
+						<BlockTitle>Hello</BlockTitle>
 					</Block>
 				</ContainerSettings>
 				<ContainerSettings>
 					<Block>
-						<BlockTitle>
-							Hello
-						</BlockTitle>
+						<BlockTitle>Hello</BlockTitle>
 					</Block>
 				</ContainerSettings>
 			</Wrapper>

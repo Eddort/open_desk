@@ -1,26 +1,31 @@
-import React, {  Component } from 'react'
+import React, { Component } from 'react'
 
 import { Button } from 'spec'
 // import { data, Board } from 'dnd-desk'
 export default class User extends Component {
-	
-	constructor(props) {
-		super(props);
-		this.setValue = (e) => {
-			this.props.setName(e.target.value);
-		};
+	constructor (props) {
+		super(props)
+		this.setValue = e => {
+			this.props.setName(e.target.value)
+		}
 	}
-	
-	render() {
-		const { name }  = this.props
-		return <div>
+
+	render () {
+		const { name } = this.props
+		return (
 			<div>
-				Приве2т,
-				
+				<div>
+					Приве2т,
 					{name}
-				<input type="text" onInput={ this.setValue }/>
-				<Button handleClick={ function(){ console.log(123) } } name={ 'SSSS' } />
+					<input type="text" onInput={this.setValue} />
+					<Button
+						handleClick={function () {
+							console.log(123)
+						}}
+						name={'SSSS'}
+					/>
+				</div>
 			</div>
-		</div>
+		)
 	}
 }

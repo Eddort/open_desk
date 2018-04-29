@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import styled from 'styled-components'
 // import { data, Board } from 'dnd-desk'
-import UserControls from './userControls';
+import UserControls from './userControls'
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 20px 15px 20px 20px;
 	min-height: calc(100vh - 50px);
-`;
+`
 
 const ContainerSettings = styled.div`
 	display: flex;
 	margin: 5px 0;
-`;
+`
 
 const Block = styled.div`
 	background-color: green;
@@ -22,46 +22,46 @@ const Block = styled.div`
 	background-color: #fff;
 	color: #000;
 	min-height: 300px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1);
-`;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
+`
 
 const BlockTitle = styled.div`
-	background-color: #EDF1F6;
+	background-color: #edf1f6;
 	padding: 10px;
-	border-bottom: 1px solid rgba(0,0,0,0.1);
-	color: #6A798C;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	color: #6a798c;
 	font-size: 20px;
 	font-weight: 500;
-`;
+`
 
 const ScrollContent = styled.div`
 	overflow: auto;
 	max-height: 500px;
-`;
+`
 
 const Item = styled.div`
 	padding: 20px;
-	border-bottom: 1px solid rgba(0,0,0,0.1);
-	display: flex; 
-    justify-content: space-between;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	display: flex;
+	justify-content: space-between;
 	&:hover {
-		background-color: #EDF1F6;
+		background-color: #edf1f6;
 		font-weight: bold;
 	}
-`;
+`
 
 const AddNewItem = Item.extend`
 	justify-content: center;
 	font-size: 20px;
-	color: #00A3F5;
+	color: #00a3f5;
 	cursor: pointer;
 	padding: 10px;
-`;
+`
 
 const ProjectDescription = styled.textarea`
 	width: 100%;
 	height: 250px;
-`;
+`
 
 const fakeUsers = [
 	{
@@ -87,64 +87,53 @@ const fakeUsers = [
 ]
 
 export default class Profile extends Component {
-	
-	constructor(props) {
-		super(props);
+	constructor (props) {
+		super(props)
 	}
-	
-	render() {
+
+	render () {
 		return (
 			<Wrapper>
 				<ContainerSettings>
 					<Block>
-						<BlockTitle>
-							Подключенные пользователи
-						</BlockTitle>
+						<BlockTitle>Подключенные пользователи</BlockTitle>
 						<ScrollContent>
-							{ fakeUsers.map(({ name, id, role }) => (
-								<Item key={ id }>
-									{ name }
-									<UserControls role={ role } id={ id } changedHandler={ console.log }/>
+							{fakeUsers.map(({ name, id, role }) => 
+								<Item key={id}>
+									{name}
+									<UserControls
+										role={role}
+										id={id}
+										changedHandler={console.log}
+									/>
 								</Item>
-							)) }
+							)}
 							<AddNewItem>
-								<i className="fa fa-plus-circle"></i>
+								<i className="fa fa-plus-circle" />
 							</AddNewItem>
 						</ScrollContent>
 					</Block>
 				</ContainerSettings>
 				<ContainerSettings>
 					<Block>
-						<BlockTitle>
-							Категории
-						</BlockTitle>
+						<BlockTitle>Категории</BlockTitle>
 						<ScrollContent>
-							<Item>
-								Оплата сайтов
-							</Item>
-							<Item>
-								Оплата доменов
-							</Item>
-							<Item>
-								Оплата доменов
-							</Item>
+							<Item>Оплата сайтов</Item>
+							<Item>Оплата доменов</Item>
+							<Item>Оплата доменов</Item>
 							<AddNewItem>
-								<i className="fa fa-plus-circle"></i>
+								<i className="fa fa-plus-circle" />
 							</AddNewItem>
 						</ScrollContent>
 					</Block>
 				</ContainerSettings>
 				<ContainerSettings>
 					<Block>
-						<BlockTitle>
-							Фоновый рисунок
-						</BlockTitle>
+						<BlockTitle>Фоновый рисунок</BlockTitle>
 					</Block>
 					<Block>
-						<BlockTitle>
-							Заголовок и описание
-						</BlockTitle>
-						<ProjectDescription/>
+						<BlockTitle>Заголовок и описание</BlockTitle>
+						<ProjectDescription />
 					</Block>
 				</ContainerSettings>
 			</Wrapper>
