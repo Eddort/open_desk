@@ -4,7 +4,7 @@ import auth from './auth'
 import profile from './profile'
 import projects, { existProject } from './projects'
 
-const $ = express.Router();
+const $ = express.Router()
 
 $.use('/', projects)
 $.use('/project/:projectUid', existProject, dashBoard)

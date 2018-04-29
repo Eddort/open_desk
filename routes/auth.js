@@ -6,7 +6,7 @@ $.get('/', (req, res) => {
 })
 
 $.get('/login', (req, res) => {
-	const { url } = req;
+	const { url } = req
 	const { user } = req.o
 	if (user) {
 		return res.redirect('/')
