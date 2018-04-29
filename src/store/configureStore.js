@@ -11,13 +11,12 @@ if (typeof window === 'object' && window.__initialState__) {
 	defaultInitState = window.__initialState__
 }
 
-export default function configureStore(history, initialState) {
+export default function configureStore (history, initialState) {
 	const sagaMiddleware = createSagaMiddleware()
 	const store = createStore(
 		rootReducer,
 		merge({}, initialState, defaultInitState),
 		applyMiddleware(routerMiddleware(history), sagaMiddleware)
-		
 	)
 	sagaMiddleware.run(rootSaga)
 	if (module.hot) {
@@ -26,6 +25,6 @@ export default function configureStore(history, initialState) {
 			store.replaceReducer(nextRootReducer.default)
 		})
 	}
-	
+
 	return store
 }

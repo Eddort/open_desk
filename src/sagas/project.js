@@ -1,10 +1,10 @@
 import { call, put, takeEvery, fork } from 'redux-saga/effects'
 import api from '../lib/api'
 import { updateList } from '../actions/project'
-function* getNewProject(action) {
+function* getNewProject (action) {
 	try {
-		yield call(api, { url:'/add', data: action.payload });
-		const { data }  = yield call(api, { url:'/' });
+		yield call(api, { url: '/add', data: action.payload })
+		const { data } = yield call(api, { url: '/' })
 		console.log(data.projects)
 		yield put(updateList(data.projects))
 		// window.location.href = '/'
@@ -24,10 +24,10 @@ function* getNewProject(action) {
   Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
   Allows concurrent fetches of user.
 */
-function* getNew() {
-	yield takeEvery('GET_NEW_PROJECT', getNewProject);
+function* getNew () {
+	yield takeEvery('GET_NEW_PROJECT', getNewProject)
 }
 
-export default function* () {
+export default function*() {
 	yield fork(getNew)
 }

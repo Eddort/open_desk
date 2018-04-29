@@ -1,11 +1,9 @@
 import { merge } from 'lodash'
 
-const initialState = {
-};
+const initialState = {}
 const NAME = 'project'
 
-export default function projectState(state = initialState, action) {
-	
+export default function projectState (state = initialState, action) {
 	switch (action.type) {
 		case 'CHANGE_PAGE':
 			if (action.payload[NAME]) {
@@ -13,8 +11,8 @@ export default function projectState(state = initialState, action) {
 			}
 			return state
 		case 'UPDATE_LIST_PROJECT':
-			return  merge([], state, action.payload )
+			return merge([], state, action.payload)
 		default:
-			return state;
+			return state
 	}
 }
