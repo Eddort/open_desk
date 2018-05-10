@@ -1,10 +1,11 @@
-import { model } from 'mongoose-decorators'
-import mongoose from 'mongoose'
+//@flow
+import mongoose, { Schema } from 'mongoose'
+import type { ObjectId } from 'mongoose'
 import Task from './task'
 
 const COL_FIELD_NAME = 'quotes'
 
-@model(
+export const DeskSchema = new Schema(
 	{
 		header: {
 			type: String,
@@ -32,16 +33,30 @@ const COL_FIELD_NAME = 'quotes'
 		autoIndex: true
 	}
 )
-export default class Desk {
-	static async getNew ({ header, projectId }) {
+
+export class Desk /* :: extends Mongoose$Document */ {
+	header: string
+	projectId: ObjectId
+	uid: string
+	dateCreate: Date
+	columns: Array<string>
+	
+	static async getNew ({ header, projectId }: any): Promise<Desk> {
 		let Desk = this
 		const desk = new Desk({ header, projectId })
 		return desk.save()
 	}
-	static async getOneByProjectId ({ projectId, _id, user }) {
+	static async getOneByProjectId ({ projectId, _id, user }: Object) : Object {
 		let Desk = this
 		const desk = await Desk.findOne({ projectId, _id })
-		const tasks = await Task.getAllDeskTasks(desk._id)
+		if (! desk) {
+			return {}
+		}
+		const tasks = desk._id
+		// const tasks = await Task.getAllDeskTasks(desk._id)
+		if (! tasks) {
+			return {}
+		}
 		return {
 			[COL_FIELD_NAME]: tasks,
 			authors: {
@@ -56,3 +71,6 @@ export default class Desk {
 		}, {})
 	}
 }
+
+DeskSchema.loadClass(Desk)
+export default mongoose.model('Desk', DeskSchema)

@@ -1,7 +1,9 @@
-import { model } from 'mongoose-decorators'
-import mongoose from 'mongoose'
+//@flow
+import mongoose, { Schema } from 'mongoose'
+import type { ObjectId } from 'mongoose'
 import fs from './decorators/fs'
-@model(
+
+export const ProjectSchema = new Schema(
 	{
 		title: {
 			type: String,
@@ -45,9 +47,21 @@ import fs from './decorators/fs'
 		autoIndex: true
 	}
 )
-export default class Project {
+
+export class Project /* :: extends Mongoose$Document */ {
+		
 	@fs
-	static async getNew ({ title, userId }) {
+	title: string
+	userIds: [ObjectId]
+	roles: {
+		admin: [ObjectId],
+		agent: [ObjectId],
+		assessor: [ObjectId]
+	}
+	uid: string
+	avatar: string
+	dateCreate: Date
+	static async getNew ({ title, userId }: any) {
 		let Project = this
 		if (!title) {
 			const projectCnt = await Project.count()
@@ -69,13 +83,16 @@ export default class Project {
 		// // console.log( mongoose.Schema.Types.ObjectId())
 		return project.save()
 	}
-	static async getAllAvail ({ userId }) {
+	static async getAllAvail ({ userId }: any) {
 		return this.find({ userIds: userId })
 	}
-	static async getByUid (uid) {
+	static async getByUid (uid: string) {
 		return this.findOne({ uid })
 	}
-	static async getAvailProject ({ uid }) {
+	static async getAvailProject ({ uid }: any) {
 		return this.findOne({ uid })
 	}
 }
+
+ProjectSchema.loadClass(Project)
+export default mongoose.model('Project', ProjectSchema)

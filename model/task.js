@@ -59,6 +59,16 @@ class Task /* :: extends Mongoose$Document */ {
 	deskId: ObjectId
 	projectId: ObjectId
 	url: string
+	/**
+	 * @param  {} {column
+	 * @param  {} deskId
+	 * @param  {} projectId
+	 * @param  {} content
+	 * @param  {} authorId
+	 * @param  {} url
+	 * @param  {Object} header}
+	 * @returns Promise
+	 */
 	static async getNew ({
 		column,
 		deskId,
@@ -85,19 +95,26 @@ class Task /* :: extends Mongoose$Document */ {
 		})
 		return task.save()
 	}
+	/**
+	 * @param  {ObjectId} deskId
+	 * @returns Promise
+	 */
 	static findAllDeskTasks (deskId: ObjectId): Promise<Array<Task>> {
 		return this.find({ deskId })
 	}
+	/**
+	 * @param  {ObjectId} deskId
+	 * @returns Object
+	 */
 	static async getAllDeskTasks (deskId: ObjectId): Object {
 		const tasks = await this.findAllDeskTasks(deskId)
-		if (!tasks.length) {
+		if (! tasks.length) {
 			return {}
 		}
 		console.log(2222)
 		return tasks.reduce((accum, task) => {
 			let { column } = task
-
-			if (!accum[column]) {
+			if (! accum[column]) {
 				accum[column] = []
 			}
 			accum[column].push(task)

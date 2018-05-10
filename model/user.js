@@ -1,8 +1,9 @@
-import mongoose from 'mongoose'
-import loadClass from 'mongoose-class-wrapper'
+//@flow
+import mongoose, { Schema } from 'mongoose'
+import type { ObjectId } from 'mongoose'
 import fs from './decorators/fs'
 
-const schema = new mongoose.Schema({
+export const UserSchema = new Schema({
 	name: {
 		type: String
 	},
@@ -16,21 +17,24 @@ const schema = new mongoose.Schema({
 	}
 })
 
-class User {
+export class User /* :: extends Mongoose$Document */ {
 	@fs
-	static async getSessionUser (_id) {
-		const user = await this.findOne({ _id: mongoose.Types.ObjectId(_id) })
+	uid: ?string
+	/**
+	 * @param  {ObjectId} _id
+	 * @returns User
+	 */
+	static async getSessionUser (_id: ObjectId): (?User | Promise<?User>) {
+		const user = await this.findOne({_id})
 		if (user && !user.uid) {
 			user.uid = Math.random()
 				.toString(35)
-				.substr(2, 9)
+				.substr(2, 9).toString()
 			return user.save()
 		}
 		return user
 	}
 }
 
-schema.plugin(loadClass, User)
-const m = mongoose.model('User', schema)
-
-export default m
+UserSchema.loadClass(User)
+export default mongoose.model('User', UserSchema)
