@@ -35,29 +35,27 @@ $.get(
 	'/desk',
 	hre(async (req, res) => {
 		const { url } = req
-		const _desk = await Desk.getNew({
-			header: 'Test desk',
-			projectId: req.o.project._id
-		})
-		await Task.getNew({
-			column: 'backlog',
-			deskId: _desk._id,
+		// await Desk.getNew({header: 'TEST', projectId: req.o.project._id})
+		const desk = await Desk.findOneByProjectId(req.o.project._id)
+		// Task._genRandomTasks(3, desk.columns, {
+		// 	column: 'backlog',
+		// 	deskId: desk._id,
+		// 	projectId: req.o.project._id,
+		// 	content: 'test',
+		// 	authorId: req.o.user.uid,
+		// 	url: '/'
+		// })
+		const renderDesk = await Desk.getOneByProjectId({
 			projectId: req.o.project._id,
-			content: 'test',
-			authorId: req.o.user.uid,
-			url: '/'
-		})
-		const desk = await Desk.getOneByProjectId({
-			projectId: req.o.project._id,
-			_id: _desk._id,
-			user: req.o.user
+			user: req.o.user,
+			_id: desk._id
 		})
 		return res.react({
 			url,
 			initialState: {
 				user: req.o.user,
 				project: req.o.project,
-				desk: desk
+				desk: renderDesk
 			}
 		})
 	})

@@ -69,7 +69,7 @@ export const reorderQuoteMap = ({
 
   return {
     quoteMap: result,
-    autoFocusQuoteId: target.id,
+    autoFocusQuoteId: target.uid,
   };
 };
 

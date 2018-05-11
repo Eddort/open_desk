@@ -2,6 +2,9 @@
 import mongoose, { Schema } from 'mongoose'
 import type { ObjectId } from 'mongoose'
 
+const random = (max, min) =>
+	Math.floor(Math.random() * (max - min)) + min
+
 const TaskSchema = new Schema(
 	{
 		header: {
@@ -60,6 +63,7 @@ class Task /* :: extends Mongoose$Document */ {
 	projectId: ObjectId
 	url: string
 	/**
+	 * Создать новый таск и сгенерить тайтл если нужно
 	 * @param  {} {column
 	 * @param  {} deskId
 	 * @param  {} projectId
@@ -79,7 +83,7 @@ class Task /* :: extends Mongoose$Document */ {
 		header
 	}: Object): Promise<Task> {
 		let Task = this
-		const countTasks = await Task.count({ column, projectId, authorId })
+		const countTasks = await Task.count({ projectId, authorId })
 		if (!header) {
 			header = `Новая задача ${countTasks + 1}`
 		}
@@ -103,23 +107,36 @@ class Task /* :: extends Mongoose$Document */ {
 		return this.find({ deskId })
 	}
 	/**
+	 * Получить все таски для выбранного деск
 	 * @param  {ObjectId} deskId
 	 * @returns Object
 	 */
 	static async getAllDeskTasks (deskId: ObjectId): Object {
 		const tasks = await this.findAllDeskTasks(deskId)
-		if (! tasks.length) {
+		if (!tasks.length) {
 			return {}
 		}
 		console.log(2222)
 		return tasks.reduce((accum, task) => {
 			let { column } = task
-			if (! accum[column]) {
+			if (!accum[column]) {
 				accum[column] = []
 			}
 			accum[column].push(task)
 			return accum
 		}, {})
+	}
+	static async _genRandomTasks (
+		count: number,
+		columns: Array<string>,
+		opts: Object
+	) {
+		const max = count
+		while (count) {
+			const column = columns[random(0, max)]
+			await this.getNew(Object.assign({}, opts, { column }))
+			count--
+		}
 	}
 }
 

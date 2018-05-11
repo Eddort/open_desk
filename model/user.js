@@ -14,12 +14,14 @@ export const UserSchema = new Schema({
 	uid: {
 		type: String,
 		unique: true
-	}
+	},
+	avatarUrl: String
 })
 
 export class User /* :: extends Mongoose$Document */ {
 	@fs
 	uid: ?string
+	avatarUrl: ?string
 	/**
 	 * @param  {ObjectId} _id
 	 * @returns User

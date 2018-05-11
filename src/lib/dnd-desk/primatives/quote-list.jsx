@@ -75,18 +75,18 @@ class InnerQuoteList extends Component<QuoteListProps> {
 
     return (
       <div>
-        {this.props.quotes.length ? 
+        {this.props.quotes|| console.log(this.props.quotes) && this.props.quotes.length ? 
         this.props.quotes.map((quote: Quote, index: number) => (
-          <Draggable isDragDisabled={ false } key={quote.uid} draggableId={quote.id} index={index || '!!!!!!!!!'}>
+          <Draggable isDragDisabled={ false } key={quote.uid} draggableId={quote.uid} index={index || '!!!!!!!!!'}>
             {(dragProvided: DraggableProvided, dragSnapshot: DraggableStateSnapshot) => (
               <div>
                 <QuoteItem
-                  key={quote.id}
+                  key={quote.uid}
                   quote={quote}
                   author={this.props.authors[quote.authorId]}
                   isDragging={dragSnapshot.isDragging}
                   provided={dragProvided}
-                  autoFocus={this.props.autoFocusQuoteId === quote.id}
+                  autoFocus={this.props.autoFocusQuoteId === quote.uid}
                 />
                 {dragProvided.placeholder}
               </div>
